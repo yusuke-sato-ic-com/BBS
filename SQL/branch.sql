@@ -3,5 +3,5 @@ CREATE TABLE `branch` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
   
-  INSERT INTO `branch` VALUES (1,'本社'),(2,'東京支店')
-,(3,'名古屋支店'),(4,'大阪支店');
+  INSERT INTO `branch` VALUES (1,'本社'),(2,'支店A')
+,(3,'支店B'),(4,'支店C');

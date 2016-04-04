@@ -3,5 +3,5 @@ CREATE TABLE `department` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 
-  INSERT INTO `department` VALUES (1,'人事総務部'),(2,'情報セキュリティ部')
-,(3,'店長'),(4,'社員');
+  INSERT INTO `department` VALUES (1,'総務人事'),(2,'情報管理')
+,(3,'支店長'),(4,'社員');

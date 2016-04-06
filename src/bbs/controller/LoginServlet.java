@@ -35,39 +35,18 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService = new LoginService();
 		User user = loginService.login(loginId, password);
 
-		List<String> messages = new ArrayList<String>();
-
 		HttpSession session = request.getSession();
 
-		// ログインIDとパスワードのフォーマットチェック
-//		if(signupCheck(loginId, "ログインID", "^\\w{6,20}$")) {
-//			session.setAttribute("loginUser", user); // Serviceを経由してuserオブジェクトを取得できたらセッションにセット
-//			response.sendRedirect("./"); //トップ画面に遷移
-//		} else {
-//			messages.add("ログインIDを入力してください。");
-//			session.setAttribute("errorMessages", messages);
-//			response.sendRedirect("login");
-//		}
-//
-//		if(signupCheck(password, "パスワード", "^\\w{6,255}$")) {
-//			session.setAttribute("loginUser", user); // Serviceを経由してuserオブジェクトを取得できたらセッションにセット
-//			response.sendRedirect("./"); //トップ画面に遷移
-//		} else {
-//			messages.add("パスワードを入力してください。");
-//			session.setAttribute("errorMessages", messages);
-//			response.sendRedirect("login");
-//		}
-//	}
-//
-//		// 【メソッド】ログインIDとパスワードのフォーマットチェック
-//	static boolean signupCheck (String idOrPass, String idOrPassMessage, String formatCheck) throws IOException {
-//		if(idOrPass != null && idOrPass.matches((formatCheck))) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//
+		//TODO エラーメッセージの改良
+		if(user != null) {
+			session.setAttribute("loginUser", user);
+			response.sendRedirect("./"); // ホーム画面に遷移
+		} else {
+			List<String> messages = new ArrayList<String>();
+			messages.add("ログインに失敗しました");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("login");
+		}
 	}
 }
-
 

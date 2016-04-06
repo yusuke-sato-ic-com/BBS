@@ -5,7 +5,7 @@ CREATE TABLE `user` (
   `name` varchar(10) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL,
-  `using` boolean NOT NULL,
+  `using` TINYINT(1) NOT NULL default 0, 
   PRIMARY KEY (`id`);
   
   

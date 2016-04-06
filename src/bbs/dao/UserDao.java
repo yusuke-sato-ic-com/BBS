@@ -18,10 +18,9 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql =  "SELECT * FROM user WHERE login_id = ? AND password = ?";
+			String sql = "SELECT * FROM user WHERE login_id = ? AND password = ?";
 
 			ps = connection.prepareStatement(sql);
-
 			ps.setString(1, loginId);
 			ps.setString(2, password);
 
@@ -48,19 +47,19 @@ public class UserDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String loginId = rs.getString("login_id");
-				String password = rs.getString("password");
 				String name = rs.getString("name");
+				String password = rs.getString("password");
 				String branchId = rs.getString("branch_id");
 				String departmentId = rs.getString("department_id");
-				boolean using = rs.getBoolean("using");
 
 				User user = new User();
 				user.setId(id);
 				user.setLoginId(loginId);
+				user.setName(name);
 				user.setPassword(password);
-				user.setName(name);;
 				user.setBranchId(branchId);
 				user.setDepartmentId(departmentId);
+				user.setUsing(true);
 
 				ret.add(user);
 			}
@@ -70,6 +69,7 @@ public class UserDao {
 		}
 	}
 
+	// ユーザー新規登録で入力されたデータをDBに登録
 	public void insert(Connection connection, User user) {
 
 		PreparedStatement ps = null;

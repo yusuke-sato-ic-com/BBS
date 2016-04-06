@@ -11,10 +11,6 @@
 <body>
 <div class="main-contents">
 
-<%--
-中央に揃える
-
- --%>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -35,8 +31,8 @@
 	<input name="password" type="password" id="password"/> <br />
 
 	<input type="submit" value="ログイン" /> <br />
+	<a href="./">戻る</a>
 </form>
-
 </div>
 </body>
 </html>

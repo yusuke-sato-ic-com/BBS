@@ -17,14 +17,13 @@
 ・登録が正常に完了したら、ユーザー管理画面に遷移
 ・登録が正常に完了しなければ、適切なバリデーションメッセージを表示
 ・パスワード項目は、登録用のフィールドと確認用のフィールドを用意
-・中央で寄せる、CSSでのレイアウト、デザイン編集
  --%>
 
 <div class="main-contents"> <%-- divはcssと組み合わせてデザイン性をアップできる --%>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
-			<c:forEach items="${erroeMessages}" var="messages">
+			<c:forEach items="${errorMessages}" var="messages">
 				<li><c:out value="${messages}"/>
 			</c:forEach>
 		</ul>
@@ -34,22 +33,22 @@
 
 <form action="signup" method="post"><br />
 	<label for="name">名前</label>
-	<input name="name" id="name"/><br />
+	<input name="name" value="${user.name}" id="name"/><br />
 
 	<label for="loginId">ログインID</label>
-	<input name="loginId" id="loginId"/><br />
+	<input name="loginId"  value="${user.loginId}" id="loginId"/><br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 
 	<label for="branchId">所属支店</label> <%-- プルかラジオ --%>
-	<input name="branchId" id="branchId"/><br />
+	<input name="branchId"  value="${user.branchId}" id="branchId"/><br />
 
 	<label for="departmentId">部署・役職</label> <%-- プルかラジオ --%>
-	<input name="departmentId" id="departmentId"/><br />
+	<input name="departmentId"  value="${user.departmentId}" id="departmentId"/><br />
 
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
+<%--	<a href="./">戻る</a>  --%>
 </form>
 </div>
 </body>

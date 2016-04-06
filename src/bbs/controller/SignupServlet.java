@@ -31,28 +31,28 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
+		User user = new User();
+		user.setLoginId(request.getParameter("loginId"));
+		user.setPassword(request.getParameter("password"));
+		user.setName(request.getParameter("name"));
+		user.setBranchId(request.getParameter("branchId"));
+		user.setDepartmentId(request.getParameter("departmentId"));
+
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
+
 		if(isValid(request, messages) == true) {
-
-			User user = new User();
-			user.setLoginId(request.getParameter("loginId"));
-			user.setPassword(request.getParameter("password"));
-			user.setName(request.getParameter("name"));
-			user.setLoginId(request.getParameter("branchId"));
-			user.setDepartmentId(request.getParameter("departmentId"));
-
 			new UserService().register(user);
-
-			response.sendRedirect("./");
+			response.sendRedirect("userManagement");
 		} else {
+			request.setAttribute("user", user);
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("signup");
+			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
-		String loginId = request.getParameter("loginID");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		if(StringUtils.isEmpty(loginId) == true) {
@@ -64,7 +64,6 @@ public class SignupServlet extends HttpServlet {
 
 		//TODO
 		// ログインIDがすでに使われていないかも、確認必要
-
 		if(messages.size() == 0) {
 			return true;
 		} else {

@@ -12,6 +12,7 @@ public class User implements Serializable {
 	private String branchId;
 	private String departmentId;
 	private boolean using;
+
 	public int getId() {
 		return id;
 	}
@@ -54,6 +55,7 @@ public class User implements Serializable {
 	public void setUsing(boolean using) {
 		this.using = using;
 	}
+
 
 
 

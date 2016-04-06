@@ -36,8 +36,10 @@ public class MessageDao {
 			ps = connection.prepareStatement(sql.toString());
 
 //	SQLException パラメータ追加
-//			ps.setInt(1, message.getUserId());
-//			ps.setString(2, message.getText());
+			ps.setInt(1, message.getUserId());
+			ps.setString(2, message.getTitle());
+			ps.setString(3, message.getCategory());
+			ps.setString(4, message.getText());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

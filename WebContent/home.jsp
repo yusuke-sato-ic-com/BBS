@@ -24,10 +24,21 @@
 	</c:if>
 </div>
 
-
-
+投稿の一覧表示実装中
+<div class="messages">
+	<c:forEach items="${messages}" var="message">
+		<div class="message">
+			<div class="name">
+				<span class="name"><c:out value="${message.name}" /> </span>
+			</div>
+			<div class="title"><c:out value="${message.title}" /> </div>
+			<div class="category"><c:out value="${message.category}" /> </div>
+			<div class="text"><c:out value="${message.text}" /> </div>
+			<div class="date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
+		</div>
+	</c:forEach>
 </div>
 
-
+</div>
 </body>
 </html>

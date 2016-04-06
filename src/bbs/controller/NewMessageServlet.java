@@ -22,6 +22,13 @@ public class NewMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			 throws IOException, ServletException {
+
+		request.getRequestDispatcher("/newMessage.jsp").forward(request, response);
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
@@ -33,8 +40,7 @@ public class NewMessageServlet extends HttpServlet {
 		message.setTitle(request.getParameter("title"));
 		message.setCategory(request.getParameter("category"));
 		message.setText(request.getParameter("text"));
-//		message.setUserId(user.getId());
-
+		message.setUserId(user.getId());
 
 		if(isValid(request, messages) == true) {
 			new MessageService().register(message);

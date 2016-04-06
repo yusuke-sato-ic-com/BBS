@@ -9,7 +9,6 @@
 <title>新規投稿</title>
 </head>
 <body>
-新規投稿画面編集中
 
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">

@@ -4,11 +4,38 @@ import static bbs.utils.CloseableUtil.*;
 import static bbs.utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import bbs.beans.Message;
 import bbs.dao.MessageDao;
 
 public class MessageService {
+
+	private static final int LIMIT_NUM = 1000;
+
+	// UserMessageDaoを書く
+	public List<UserMessage> getMessage() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserMessageDao messageDao = new UserMessageDao();
+			List<UserMessage> ret = messageDao.getUserMessages(connection, LIMIT_NUM);
+
+			commit(connection);
+
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	public void register(Message message) {
 

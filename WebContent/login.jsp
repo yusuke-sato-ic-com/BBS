@@ -11,7 +11,6 @@
 <body>
 <div class="main-contents">
 
-
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul> <%-- <ul>は順序のないリストを表示する歳際に使用する。順序のあるリスト表示は<ol> --%>

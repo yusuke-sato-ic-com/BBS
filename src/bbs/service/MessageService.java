@@ -7,13 +7,14 @@ import java.sql.Connection;
 import java.util.List;
 
 import bbs.beans.Message;
+import bbs.beans.UserMessage;
 import bbs.dao.MessageDao;
+import bbs.dao.UserMessageDao;
 
 public class MessageService {
 
 	private static final int LIMIT_NUM = 1000;
 
-	// UserMessageDaoを書く
 	public List<UserMessage> getMessage() {
 
 		Connection connection = null;

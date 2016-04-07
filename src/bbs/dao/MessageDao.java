@@ -4,10 +4,14 @@ import static bbs.utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bbs.exception.SQLRuntimeException;
 import bbs.beans.Message;
+import bbs.beans.User;
 
 public class MessageDao {
 

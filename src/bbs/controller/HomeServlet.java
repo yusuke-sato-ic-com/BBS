@@ -21,12 +21,10 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		 throws IOException, ServletException {
 
-		User user = (User) request.getSession().getAttribute("loginUser");
-
+//		User user = (User) request.getSession().getAttribute("loginUser");
 		List<UserMessage> messages = new MessageService().getMessage();
 
 		request.setAttribute("messages", messages);
-
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
 

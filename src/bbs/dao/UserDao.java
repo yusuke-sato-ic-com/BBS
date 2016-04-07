@@ -61,6 +61,9 @@ public class UserDao {
 				user.setDepartmentId(departmentId);
 				user.setUsing(true);
 
+				System.out.println(user.getLoginId());
+				System.out.println(user.getName());
+
 				ret.add(user);
 			}
 			return ret;

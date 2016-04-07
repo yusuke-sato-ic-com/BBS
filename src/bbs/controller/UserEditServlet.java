@@ -16,8 +16,8 @@ import org.apache.commons.lang.StringUtils;
 import bbs.beans.User;
 import bbs.service.UserService;
 
-@WebServlet(urlPatterns = { "/signup" })
-public class SignupServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/userEdit" })
+public class UserEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -47,7 +47,7 @@ public class SignupServlet extends HttpServlet {
 		} else {
 			request.setAttribute("user", user);
 			session.setAttribute("errorMessages", messages);
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
+			request.getRequestDispatcher("userEdit.jsp").forward(request, response);
 		}
 	}
 

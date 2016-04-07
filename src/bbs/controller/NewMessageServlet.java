@@ -32,8 +32,8 @@ public class NewMessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
-		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
+		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("loginUser");
 
 		Message message = new Message();
@@ -46,28 +46,44 @@ public class NewMessageServlet extends HttpServlet {
 			new MessageService().register(message);
 			response.sendRedirect("./");
 		} else {
+			request.setAttribute("message", message);
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
+			request.getRequestDispatcher("/newMessage.jsp").forward(request, response);
 		}
 	}
 
-	//TODO バリデーションエラー
+	//バリデーションエラー
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
 		String title = request.getParameter("title");
-		// 件名 プルダウンでnullの設定
 		String category = request.getParameter("category");
 		String text = request.getParameter("text");
 
 		if(StringUtils.isEmpty(title) == true) {
 			messages.add("件名を入力してください。");
+		} else {
+			int digit = title.length();
+			if(digit > 50) {
+				messages.add("件名は50文字以下で入力してください。");
+			}
 		}
-		// 件名は-1のときにエラーという仕様にする？
+
 		if(StringUtils.isEmpty(category) == true) {
-			messages.add("カテゴリーを選択してください。");
+			messages.add("カテゴリーを入力してください。");
+		} else {
+			int digit = category.length();
+			if(digit > 10) {
+				messages.add("カテゴリーは10文字以下で入力してください。");
+			}
 		}
+
 		if(StringUtils.isEmpty(text) == true) {
-			messages.add("件名を入力してください。");
+			messages.add("本文を入力してください。");
+		} else {
+			int digit = text.length();
+			if(digit > 1000) {
+				messages.add("本文は1000文字以下で入力してください。");
+			}
 		}
 
 		if(messages.size() == 0) {

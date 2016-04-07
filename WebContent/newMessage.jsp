@@ -24,17 +24,21 @@
 
 <form action="newMessage" method="post"><br />
 	<label for="title">件名</label> <br />
-	<input name="title" value="${user.name}" id="title"/><br />
+	<input name="title" value="${message.title}"  id="title"/><br />
 
 	<label for="category">カテゴリー</label> <br />
+	<input name="category" value="${message.category}"  id="title"/><br />
+<%--	<label for="category">カテゴリー</label> <br />
 		<select name="category">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
+			<option value="">カテゴリーを選択して下さい</option>
+			<option value="1">お知らせ</option>
+			<option value="2">本部より</option>
+			<option value="3">技術部より</option>
+			<option value="4">その他</option>
 		</select> <br>
-
+ --%>
 	<label for="text">本文</label> <br />
-	<textarea name="text" cols="50" rows="20" class="text-box"></textarea> <br />
+	<textarea name="text" cols="50" rows="20" class="text-box" >${message.text}</textarea> <br />
 
 	<input type="submit" value="投稿" /> <br />
 	<a href="./">戻る</a>

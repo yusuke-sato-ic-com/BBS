@@ -9,7 +9,7 @@ public class Message implements Serializable {
 	private int id;
 	private int userId;
 	private String title;
-	private String category; // 要確認！プルダウン仕様
+	private String category;
 	private String text;
 	private Date insertDate;
 	private Date updateDate;

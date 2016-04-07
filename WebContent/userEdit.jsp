@@ -6,17 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ユーザー新規登録</title>
+<title>ユーザー編集</title>
 </head>
 <body>
-
-<%--
- TODO
-・本社総務部のみアクセス可能。権限を持たないユーザーが開いた場合、ホーム画面に遷移し適切なメッセージを表示
-・登録が正常に完了したら、ユーザー管理画面に遷移
-・登録が正常に完了しなければ、適切なバリデーションメッセージを表示
- --%>
-
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -48,9 +40,12 @@
 	<label for="departmentId">部署・役職</label> <%-- プルかラジオ --%>
 	<input name="departmentId"  value="${user.departmentId}" id="departmentId"/><br />
 
-	<input type="submit" value="登録" /> <br />
-<a href="userManagement.jsp">戻る</a>
+	<input type="submit" value="変更" /> <br />
+<a href="userManagement.jsp">管理画面へ戻る</a>
 </form>
+
 </div>
+
+
 </body>
 </html>

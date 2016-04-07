@@ -52,12 +52,9 @@
 	<c:if test="${ not empty loginUser }">
 
 	<label for="category">カテゴリーで絞り込む</label>
-
 		<select name="category">
-			<option value="1">${category.name}</option>
-			<option value="2"></option>
-			<option value="3"></option>
-			<option value="4"></option>
+			<option value="1"></option>
+
 		</select><input type="submit" value="検索" /> <br />
 
 		<c:forEach items="${messages}" var="message">

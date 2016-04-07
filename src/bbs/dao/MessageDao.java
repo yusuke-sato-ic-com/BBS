@@ -6,14 +6,53 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import bbs.exception.SQLRuntimeException;
 import bbs.beans.Message;
 import bbs.beans.User;
+import bbs.beans.UserMessage;
 
 public class MessageDao {
+
+
+	//TODO 	修整
+	public List<Message> getCategory (Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT DISTINCT category FROM bbs.message";
+
+			// DBからデータを取得
+			ps = connection.prepareStatement(sql);
+
+			// SELECTの結果セットを表す
+			ResultSet rs = ps.executeQuery();
+			List<Message> ret = toCategoryList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<Message> toCategoryList(ResultSet rs) throws SQLException {
+		List<Message> ret = new ArrayList<Message>();
+		try {
+			while (rs.next()) {
+				String category = rs.getString("category");
+				Message categories = new Message();
+				categories.setCategory(category);
+				ret.add(categories);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
 
 	public void insert(Connection connection, Message message) {
 

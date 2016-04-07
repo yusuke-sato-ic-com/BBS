@@ -16,15 +16,19 @@ public class UserDao {
 
 	public User getUser(Connection connection, String loginId, String password) {
 
+		// プリコンパイルされたSQL文を表す
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM user WHERE login_id = ? AND password = ?";
 
+			// DBからデータを取得
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, loginId);
 			ps.setString(2, password);
 
+			// SELECTの結果セットを表す
 			ResultSet rs = ps.executeQuery();
+
 			List<User> userList = toUserList(rs);
 			if(userList.isEmpty() == true) {
 				return null;
@@ -60,9 +64,6 @@ public class UserDao {
 				user.setBranchId(branchId);
 				user.setDepartmentId(departmentId);
 				user.setUsing(true);
-
-				System.out.println(user.getLoginId());
-				System.out.println(user.getName());
 
 				ret.add(user);
 			}

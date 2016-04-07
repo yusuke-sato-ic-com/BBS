@@ -21,7 +21,7 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		 throws IOException, ServletException {
 
-//		User user = (User) request.getSession().getAttribute("loginUser");
+		// 投稿一覧表示
 		List<UserMessage> messages = new MessageService().getMessage();
 
 		request.setAttribute("messages", messages);

@@ -49,7 +49,7 @@
 	<input name="departmentId"  value="${user.departmentId}" id="departmentId"/><br />
 
 	<input type="submit" value="登録" /> <br />
-<a href="userManagement.jsp">戻る</a>
+<a href="userManagement">戻る</a>
 </form>
 </div>
 </body>

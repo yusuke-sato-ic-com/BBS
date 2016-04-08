@@ -24,7 +24,11 @@ public class UserEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
-		request.getRequestDispatcher("signup.jsp").forward(request, response);
+		Integer userId = Integer.parseInt(request.getParameter("user_id"));
+
+		User userEdit  = new UserService().getUserEdit(userId);
+		request.setAttribute("userEdit", userEdit);
+		request.getRequestDispatcher("userEdit.jsp").forward(request, response);
 	}
 
 	@Override
@@ -66,7 +70,6 @@ public class UserEditServlet extends HttpServlet {
 		} else if((!confirm.equals(password) == true)) {
 			messages.add("パスワードは同じものを入力してください。");
 		}
-
 
 		//TODO
 		// ログインIDがすでに使われていないかも、確認必要

@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private String password;
 	private String branchId;
 	private String departmentId;
-	private boolean using;
+	private String using;
 
 	public int getId() {
 		return id;
@@ -49,14 +49,11 @@ public class User implements Serializable {
 	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
 	}
-	public boolean isUsing() {
+	public String isUsing() {
 		return using;
 	}
-	public void setUsing(boolean using) {
+	public void setUsing(String using) {
 		this.using = using;
 	}
-
-
-
 
 }

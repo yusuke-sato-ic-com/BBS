@@ -14,6 +14,84 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserDao {
 
+	public User getUserEdit(Connection connection, Integer userId) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM user WHERE id = ?";
+			// DBからデータを取得
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+
+			// SELECTの結果セットを表す
+			ResultSet rs = ps.executeQuery();
+			List<User> userEdit = toUserList(rs);
+			if(userEdit.isEmpty() == true) {
+				return null;
+			} else if (2 <= userEdit.size()) {
+				throw new IllegalStateException("2 <= userEdit.size()");
+			} else {
+				return userEdit.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
+	// 登録されている全ユーザーのデータを取得
+	public List<User> getAllUser(Connection connection) {
+
+		// プリコンパイルされたSQL文を表す
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM bbs.user";
+			// DBからデータを取得
+			ps = connection.prepareStatement(sql);
+
+			// SELECTの結果セットを表す
+			ResultSet rs = ps.executeQuery();
+			List<User> allUser = toAllUserList(rs);
+			return allUser;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<User> toAllUserList(ResultSet rs) throws SQLException {
+
+		List<User> ret = new ArrayList<User>();
+		try {
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String loginId = rs.getString("login_id");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String branchId = rs.getString("branch_id");
+				String departmentId = rs.getString("department_id");
+				String using = rs.getString("using");
+
+				User user = new User();
+				user.setId(id);
+				user.setLoginId(loginId);
+				user.setName(name);
+				user.setPassword(password);
+				user.setBranchId(branchId);
+				user.setDepartmentId(departmentId);
+				user.setUsing(using);
+
+				ret.add(user);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+
 	public User getUser(Connection connection, String loginId, String password) {
 
 		// プリコンパイルされたSQL文を表す
@@ -55,6 +133,7 @@ public class UserDao {
 				String password = rs.getString("password");
 				String branchId = rs.getString("branch_id");
 				String departmentId = rs.getString("department_id");
+				String using = rs.getString("using");
 
 				User user = new User();
 				user.setId(id);
@@ -63,7 +142,7 @@ public class UserDao {
 				user.setPassword(password);
 				user.setBranchId(branchId);
 				user.setDepartmentId(departmentId);
-				user.setUsing(true);
+				user.setUsing(using);
 
 				ret.add(user);
 			}

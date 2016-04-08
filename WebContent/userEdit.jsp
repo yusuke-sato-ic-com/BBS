@@ -21,12 +21,12 @@
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
 
-<form action="signup" method="post"><br />
+<form action="userEdit" method="post"><br />
 	<label for="name">名前</label>
-	<input name="name" value="${user.name}" id="name"/><br />
+	<input name="name" value="${userEdit.name}" id="name"/><br />
 
 	<label for="loginId">ログインID</label>
-	<input name="loginId"  value="${user.loginId}" id="loginId"/><br />
+	<input name="loginId"  value="${userEdit.loginId}" id="loginId"/><br />
 
 	<label for="password">パスワード(登録用)</label>
 	<input name="password" type="password" id="password"/> <br />
@@ -35,13 +35,13 @@
 	<input name="confirm" type="password" id="confirm"/> <br />
 
 	<label for="branchId">所属支店</label> <%-- プルかラジオ --%>
-	<input name="branchId"  value="${user.branchId}" id="branchId"/><br />
+	<input name="branchId"  value="${userEdit.branchId}" id="branchId"/><br />
 
 	<label for="departmentId">部署・役職</label> <%-- プルかラジオ --%>
-	<input name="departmentId"  value="${user.departmentId}" id="departmentId"/><br />
+	<input name="departmentId"  value="${userEdit.departmentId}" id="departmentId"/><br />
 
 	<input type="submit" value="変更" /> <br />
-<a href="userManagement.jsp">管理画面へ戻る</a>
+<a href="userManagement">管理画面へ戻る</a>
 </form>
 
 </div>

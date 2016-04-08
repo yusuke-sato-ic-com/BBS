@@ -67,7 +67,6 @@ public class SignupServlet extends HttpServlet {
 			messages.add("パスワードは同じものを入力してください。");
 		}
 
-
 		//TODO
 		// ログインIDがすでに使われていないかも、確認必要
 		if(messages.size() == 0) {

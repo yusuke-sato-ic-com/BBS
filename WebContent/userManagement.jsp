@@ -11,20 +11,25 @@
 <body>
 
 <div class="header">
-<a href="signup.jsp">ユーザー新規登録</a>
+<a href="signup">ユーザー新規登録</a>
 <a href="./">ホームへ戻る</a> <br />
 </div>
 
 ユーザー管理画面実装中<br />
+利用状況と編集画面<br />
 
 <c:forEach items="${user}" var="user">
 		<div class="user">
 			<div class="user">
-				<span class="user"><c:out value="${user.name}" /> </span>
+				<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
 			</div>
 			<div class="user"><c:out value="${user.loginId}" /> </div>
 			<%-- 利用状況を表示する --%>
-		</div>
+			<form action="" method="post">
+				<input type="submit" value="ON" /> <br />
+			</form>
+			</div>
+
 	</c:forEach>
 </body>
 </html>

@@ -13,6 +13,7 @@ import bbs.dao.UserMessageDao;
 
 public class MessageService {
 
+	// DBからカテゴリーを取得
 	public List<Message> getCategory() {
 
 		Connection connection = null;
@@ -36,6 +37,7 @@ public class MessageService {
 		}
 	}
 
+	// DBから投稿メッセージを取得
 	private static final int LIMIT_NUM = 1000;
 
 	public List<UserMessage> getMessage() {
@@ -61,6 +63,7 @@ public class MessageService {
 		}
 	}
 
+	// 投稿メッセージをDBへ登録
 	public void register(Message message) {
 
 		Connection connection = null;

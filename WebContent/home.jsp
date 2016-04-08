@@ -47,14 +47,15 @@
 	</c:if>
 </div>
 
-
 <div class="messages">
 	<c:if test="${ not empty loginUser }">
 
 	<label for="category">カテゴリーで絞り込む</label>
 		<select name="category">
-			<option value="1"></option>
-
+			<option value="1">カテゴリー選択</option>
+			<c:forEach items="${category}" var="category">
+				<option value="${category.category}">${category.category}</option>
+			</c:forEach>
 		</select><input type="submit" value="検索" /> <br />
 
 		<c:forEach items="${messages}" var="message">

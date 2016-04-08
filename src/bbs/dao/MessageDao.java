@@ -17,17 +17,13 @@ import bbs.beans.UserMessage;
 
 public class MessageDao {
 
-
-	//TODO 	修整
 	public List<Message> getCategory (Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT DISTINCT category FROM bbs.message";
-
 			// DBからデータを取得
 			ps = connection.prepareStatement(sql);
-
 			// SELECTの結果セットを表す
 			ResultSet rs = ps.executeQuery();
 			List<Message> ret = toCategoryList(rs);
@@ -78,7 +74,6 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-//	SQLException パラメータ追加
 			ps.setInt(1, message.getUserId());
 			ps.setString(2, message.getTitle());
 			ps.setString(3, message.getCategory());

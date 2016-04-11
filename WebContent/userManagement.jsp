@@ -29,7 +29,6 @@
 				<input type="submit" value="ON" /> <br />
 			</form>
 			</div>
-
 	</c:forEach>
 </body>
 </html>

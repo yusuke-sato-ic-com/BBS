@@ -26,8 +26,21 @@ public class HomeServlet extends HttpServlet {
 		List<UserMessage> messages = new MessageService().getMessage();
 		List<Message> category = new MessageService().getCategory();
 
+		if (request.getParameter("category") != null){
+
+		String categoryName = request.getParameter("category");
+
+		if(categoryName.equals("カテゴリー選択")) {
+			categoryName = null;
+		} else {
+//			List<UserMessage> categoryMessages = new MessageService().getMessage(categoryName);
+			messages =  new MessageService().getMessage(categoryName);
+			}
+		}
+//		request.setAttribute("categoryMessages", categoryMessages);
 		request.setAttribute("category", category);
 		request.setAttribute("messages", messages);
+
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
 

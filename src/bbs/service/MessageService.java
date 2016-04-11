@@ -13,6 +13,7 @@ import bbs.dao.UserMessageDao;
 
 public class MessageService {
 
+
 	// DBからカテゴリーを取得
 	public List<Message> getCategory() {
 
@@ -37,7 +38,7 @@ public class MessageService {
 		}
 	}
 
-	// DBから投稿メッセージを取得
+	// DBから投稿メッセージ一覧を取得
 	private static final int LIMIT_NUM = 1000;
 
 	public List<UserMessage> getMessage() {
@@ -62,6 +63,31 @@ public class MessageService {
 			close(connection);
 		}
 	}
+
+	// DBからカテゴリー検索用の投稿メッセージを取得
+	public List<UserMessage> getMessage(String categoryName) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserMessageDao messageDao = new UserMessageDao();
+			List<UserMessage> ret = messageDao.getCategoryMessages(connection, LIMIT_NUM, categoryName);
+
+			commit(connection);
+
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 
 	// 投稿メッセージをDBへ登録
 	public void register(Message message) {

@@ -49,24 +49,43 @@
 
 <div class="messages">
 	<c:if test="${ not empty loginUser }">
-
-	<label for="category">カテゴリーで絞り込む</label>
-		<select name="category">
-			<option value="1">カテゴリー選択</option>
-			<c:forEach items="${category}" var="category">
-				<option value="${category.category}">${category.category}</option>
-			</c:forEach>
-		</select><input type="submit" value="検索" /> <br />
+		<form><br />
+			<label for="category">カテゴリーで絞り込む</label>
+			<select name="category">
+				<option>カテゴリー選択</option>
+				<c:forEach items="${category}" var="category">
+					<option value="${category.category}">${category.category}</option>
+				</c:forEach>
+			</select>
+		<input type="submit" value="検索" /> <br />
+		</form>
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="messages">
+						<li><c:out value="${messages}"/>
+					</c:forEach>
+				</ul>
+			</div>
+			<c:remove var="errorMessages" scope="session" />
+		</c:if>
 
 		<c:forEach items="${messages}" var="message">
 			<div class="message">
 				<div class="name">
 					<span class="name"><c:out value="${message.name}" /> </span>
 				</div>
-				<div class="title"><c:out value="${message.title}" /> </div>
-				<div class="category"><c:out value="${message.category}" /> </div>
-				<div class="text"><c:out value="${message.text}" /> </div>
-				<div class="date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
+				<div class="category">カテゴリー：<c:out value="${message.category}" /> </div>
+				<div class="title">件名：<c:out value="${message.title}" /> </div>
+				<div class="text">本文：<c:out value="${message.text}" /> </div>
+				<div class="date">投稿日時：<fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
+
+				<form action="newComment" method="post"><br />
+					<label for="comment">コメントする</label> <br />
+						<input name="messageId" type="hidden" value="${message.id}" id="messageId"/>
+						<textarea name="commentText" cols="50" rows="4" class="comment-box" >${comment.text}</textarea> <br />
+						<input type="submit" value="コメントを投稿" /> <br />
+				</form>
 			</div>
 		</c:forEach>
 	</c:if>

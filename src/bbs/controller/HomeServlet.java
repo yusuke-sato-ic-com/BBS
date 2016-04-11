@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bbs.beans.Message;
-import bbs.beans.User;
 import bbs.beans.UserMessage;
 import bbs.service.MessageService;
 

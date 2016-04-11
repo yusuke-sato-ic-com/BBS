@@ -32,6 +32,9 @@ public class NewCommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
+		//messageIDの取得
+		Integer messageId = Integer.parseInt((request.getParameter("messageId")));
+
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("loginUser");

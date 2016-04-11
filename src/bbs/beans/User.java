@@ -9,9 +9,12 @@ public class User implements Serializable {
 	private String loginId;
 	private String name;
 	private String password;
+	private String branchId;
+	private String departmentId;
+	private String using;
+
 	private String branchName;
 	private String departmentName;
-	private String using;
 
 	public int getId() {
 		return id;
@@ -37,6 +40,25 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+	public String getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+	public String isUsing() {
+		return using;
+	}
+	public void setUsing(String using) {
+		this.using = using;
+	}
+
 	public String getBranchName() {
 		return branchName;
 	}
@@ -49,11 +71,4 @@ public class User implements Serializable {
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
-	public String isUsing() {
-		return using;
-	}
-	public void setUsing(String using) {
-		this.using = using;
-	}
-
 }

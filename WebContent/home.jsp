@@ -39,7 +39,7 @@
 	</c:if>
 	<c:if test="${ not empty loginUser }">
 		<a href="newMessage">新規投稿</a>
-		<c:if test="${(loginUser.departmentName) == '総務人事' }">
+		<c:if test="${(loginUser.departmentId) == 1 }">
 			<a href="userManagement">ユーザー管理</a>
 		</c:if>
 		<a href="logout">ログアウト</a>
@@ -82,7 +82,7 @@
 
 				<form action="newComment" method="post"><br />
 					<label for="comment">コメントする</label> <br />
-						<input name="messageId" type="hidden" value="${message.id}" id="messageId"/>
+						<input name="messageId" <%-- type="hidden" --%> value="${message.id}" id="messageId"/><br />
 						<textarea name="commentText" cols="50" rows="4" class="comment-box" >${comment.text}</textarea> <br />
 						<input type="submit" value="コメントを投稿" /> <br />
 				</form>

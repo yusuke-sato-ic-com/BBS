@@ -40,8 +40,8 @@ public class UserEditServlet extends HttpServlet {
 		user.setLoginId(request.getParameter("loginId"));
 		user.setPassword(request.getParameter("password"));
 		user.setName(request.getParameter("name"));
-		user.setBranchName(request.getParameter("branchName"));
-		user.setDepartmentName(request.getParameter("departmentName"));
+		user.setBranchId(request.getParameter("branchId"));
+		user.setDepartmentId(request.getParameter("departmentId"));
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();

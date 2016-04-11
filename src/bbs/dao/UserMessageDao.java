@@ -41,7 +41,7 @@ public class UserMessageDao {
 		List<UserMessage> ret = new ArrayList<UserMessage>();
 		try {
 			while (rs.next()) {
-
+				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String category = rs.getString("category");
 				String title = rs.getString("title");
@@ -49,12 +49,12 @@ public class UserMessageDao {
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserMessage categoryMessages = new UserMessage();
+				categoryMessages.setId(id);
 				categoryMessages.setName(name);
 				categoryMessages.setCategory(category);
 				categoryMessages.setTitle(title);
 				categoryMessages.setText(text);
 				categoryMessages.setInsertDate(insertDate);
-
 
 				ret.add(categoryMessages);
 			}
@@ -63,7 +63,6 @@ public class UserMessageDao {
 			close(rs);
 		}
 	}
-
 
 	public List<UserMessage> getUserMessages(Connection connection, int num) {
 

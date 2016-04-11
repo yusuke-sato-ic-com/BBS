@@ -8,11 +8,5 @@ CREATE TABLE `user` (
   `using` TINYINT(1) NOT NULL default 0, 
   PRIMARY KEY (`id`)
   );
-  
-ALTER TABLE user ADD COLUMN
-  branch_name VARCHAR(45) NOT NULL,
-  department_name  VARCHAR(45) NOT NULL;
-  
-ALTER TABLE user DROP COLUMN
-  branch_id,department_id;
+ 
   

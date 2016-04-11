@@ -42,12 +42,21 @@
 	<label for="confirm">パスワード(確認用)</label>
 	<input name="confirm" type="password" id="confirm"/> <br />
 
-	<label for="branchName">所属支店</label> <%-- プルかラジオ --%>
-	<input name="branchName"  value="${user.branchName}" id="branchName"/><br />
+	<label for="branch">所属支店</label>
+	<select name="branch">
+		<option>支店選択</option>
+			<c:forEach items="${branch}" var="branch">
+				<option value="${branch.branchId}">${branch.branchName}</option>
+			</c:forEach>
+		</select>  <br />
 
-	<label for="departmentName">部署・役職</label> <%-- プルかラジオ --%>
-	<input name="departmentName"  value="${user.departmentName}" id="departmentName"/><br />
-
+	<label for="department">所属部署</label>
+	<select name="department">
+		<option>部署選択</option>
+			<c:forEach items="${department}" var="department">
+				<option value="${department.departmentId}">${department.departmentName}</option>
+			</c:forEach>
+		</select>  <br />
 	<input type="submit" value="登録" /> <br />
 <a href="userManagement">戻る</a>
 </form>

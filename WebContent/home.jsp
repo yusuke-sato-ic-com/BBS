@@ -39,7 +39,7 @@
 	</c:if>
 	<c:if test="${ not empty loginUser }">
 		<a href="newMessage">新規投稿</a>
-		<c:if test="${(loginUser.departmentId) == 1 }">
+		<c:if test="${(loginUser.departmentName) == '総務人事' }">
 			<a href="userManagement">ユーザー管理</a>
 		</c:if>
 		<a href="logout">ログアウト</a>

@@ -42,11 +42,11 @@
 	<label for="confirm">パスワード(確認用)</label>
 	<input name="confirm" type="password" id="confirm"/> <br />
 
-	<label for="branchId">所属支店</label> <%-- プルかラジオ --%>
-	<input name="branchId"  value="${user.branchId}" id="branchId"/><br />
+	<label for="branchName">所属支店</label> <%-- プルかラジオ --%>
+	<input name="branchName"  value="${user.branchName}" id="branchName"/><br />
 
-	<label for="departmentId">部署・役職</label> <%-- プルかラジオ --%>
-	<input name="departmentId"  value="${user.departmentId}" id="departmentId"/><br />
+	<label for="departmentName">部署・役職</label> <%-- プルかラジオ --%>
+	<input name="departmentName"  value="${user.departmentName}" id="departmentName"/><br />
 
 	<input type="submit" value="登録" /> <br />
 <a href="userManagement">戻る</a>

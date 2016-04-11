@@ -14,6 +14,38 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserDao {
 
+	// ユーザー編集で入力されたデータでDB更新
+	public void update(Connection connection, User user, Integer userId) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE user SET ");
+			sql.append("login_id = ?");
+			sql.append(", password = ?");
+			sql.append(", name = ?");
+			sql.append(", branch_name = ?");
+			sql.append(", department_name = ?");
+			sql.append("WHERE id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, user.getLoginId());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getBranchName());
+			ps.setString(5, user.getDepartmentName());
+			ps.setInt(6, userId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	// 編集対象のユーザー情報を取得
 	public User getUserEdit(Connection connection, Integer userId) {
 		PreparedStatement ps = null;
 		try {
@@ -70,8 +102,8 @@ public class UserDao {
 				String loginId = rs.getString("login_id");
 				String name = rs.getString("name");
 				String password = rs.getString("password");
-				String branchId = rs.getString("branch_id");
-				String departmentId = rs.getString("department_id");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
 				String using = rs.getString("using");
 
 				User user = new User();
@@ -79,8 +111,8 @@ public class UserDao {
 				user.setLoginId(loginId);
 				user.setName(name);
 				user.setPassword(password);
-				user.setBranchId(branchId);
-				user.setDepartmentId(departmentId);
+				user.setBranchName(branchName);
+				user.setDepartmentName(departmentName);
 				user.setUsing(using);
 
 				ret.add(user);
@@ -131,8 +163,8 @@ public class UserDao {
 				String loginId = rs.getString("login_id");
 				String name = rs.getString("name");
 				String password = rs.getString("password");
-				String branchId = rs.getString("branch_id");
-				String departmentId = rs.getString("department_id");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
 				String using = rs.getString("using");
 
 				User user = new User();
@@ -140,8 +172,8 @@ public class UserDao {
 				user.setLoginId(loginId);
 				user.setName(name);
 				user.setPassword(password);
-				user.setBranchId(branchId);
-				user.setDepartmentId(departmentId);
+				user.setBranchName(branchName);
+				user.setDepartmentName(departmentName);
 				user.setUsing(using);
 
 				ret.add(user);
@@ -162,23 +194,23 @@ public class UserDao {
 			sql.append("login_id");
 			sql.append(", password");
 			sql.append(", name");
-			sql.append(", branch_id");
-			sql.append(", department_id");
+			sql.append(", branch_name");
+			sql.append(", department_name");
 			sql.append(") VALUES (");
 			sql.append("?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
-			sql.append(")");
+			sql.append(") ");
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, user.getLoginId());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
-			ps.setString(4, user.getBranchId());
-			ps.setString(5, user.getDepartmentId());
+			ps.setString(4, user.getBranchName());
+			ps.setString(5, user.getDepartmentName());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

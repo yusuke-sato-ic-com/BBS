@@ -9,8 +9,8 @@ public class User implements Serializable {
 	private String loginId;
 	private String name;
 	private String password;
-	private String branchId;
-	private String departmentId;
+	private String branchName;
+	private String departmentName;
 	private String using;
 
 	public int getId() {
@@ -37,17 +37,17 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getBranchId() {
-		return branchId;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setBranchId(String branchId) {
-		this.branchId = branchId;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
-	public String getDepartmentId() {
-		return departmentId;
+	public String getDepartmentName() {
+		return departmentName;
 	}
-	public void setDepartmentId(String departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public String isUsing() {
 		return using;

@@ -12,6 +12,32 @@ import bbs.utils.CipherUtil;
 
 public class UserService {
 
+	// 新規登録用
+	public void editor(User user, Integer userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			String encPassword = CipherUtil.encrypt(user.getPassword());
+			user.setPassword(encPassword);
+
+			UserDao userDao = new UserDao();
+			userDao.update(connection, user, userId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	// ユーザー編集用
 	public User getUserEdit(Integer userId) {
 
 		Connection connection = null;
@@ -35,6 +61,7 @@ public class UserService {
 		}
 	}
 
+	// ユーザー情報取得用
 	public List<User> getAllUser() {
 
 		Connection connection = null;
@@ -58,6 +85,7 @@ public class UserService {
 		}
 	}
 
+	// 新規登録用
 	public void register(User user) {
 
 		Connection connection = null;

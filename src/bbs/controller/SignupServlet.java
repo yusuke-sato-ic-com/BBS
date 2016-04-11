@@ -35,8 +35,8 @@ public class SignupServlet extends HttpServlet {
 		user.setLoginId(request.getParameter("loginId"));
 		user.setPassword(request.getParameter("password"));
 		user.setName(request.getParameter("name"));
-		user.setBranchId(request.getParameter("branchId"));
-		user.setDepartmentId(request.getParameter("departmentId"));
+		user.setBranchName(request.getParameter("branchName"));
+		user.setDepartmentName(request.getParameter("departmentName"));
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();

@@ -25,9 +25,8 @@ public class UserEditServlet extends HttpServlet {
 			 throws IOException, ServletException {
 
 		Integer userId = Integer.parseInt(request.getParameter("user_id"));
-
 		User userEdit  = new UserService().getUserEdit(userId);
-		request.setAttribute("userEdit", userEdit);
+		request.setAttribute("user", userEdit);
 		request.getRequestDispatcher("userEdit.jsp").forward(request, response);
 	}
 
@@ -35,18 +34,20 @@ public class UserEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
+		Integer userId = Integer.parseInt(request.getParameter("user_id"));
 		User user = new User();
+		user.setId(userId);
 		user.setLoginId(request.getParameter("loginId"));
 		user.setPassword(request.getParameter("password"));
 		user.setName(request.getParameter("name"));
-		user.setBranchId(request.getParameter("branchId"));
-		user.setDepartmentId(request.getParameter("departmentId"));
+		user.setBranchName(request.getParameter("branchName"));
+		user.setDepartmentName(request.getParameter("departmentName"));
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 
 		if(isValid(request, messages) == true) {
-			new UserService().register(user);
+			new UserService().editor(user, userId);
 			response.sendRedirect("userManagement");
 		} else {
 			request.setAttribute("user", user);

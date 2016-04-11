@@ -28,8 +28,8 @@ public class SignupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
-		Integer branchName = Integer.parseInt(request.getParameter("branch"));
-		Integer departmentName = Integer.parseInt(request.getParameter("department"));
+//		Integer branchName = Integer.parseInt(request.getParameter("branch"));
+//		Integer departmentName = Integer.parseInt(request.getParameter("department"));
 		// 支店、部署のプルダウンの為のデータList
 		List<Branch> branch = new BranchService().getBranchName();
 		List<Department> department = new DepartmentService().getDepartmentName();

@@ -44,7 +44,7 @@
 
 	<label for="branch">所属支店</label>
 	<select name="branch">
-		<option>部署選択</option>
+		<option value="0">支店選択</option>
 		<c:forEach items="${branch}" var="branch">
 			<c:choose>
 				<c:when test="${branch.id == user.branchId}">
@@ -59,7 +59,7 @@
 
 	<label for="department">所属部署</label>
 	<select name="department">
-		<option>部署選択</option>
+		<option value="0">部署選択</option>
 		<c:forEach items="${department}" var="department">
 			<c:choose>
 				<c:when test="${department.id == user.departmentId}">

@@ -85,6 +85,30 @@ public class UserService {
 		}
 	}
 
+	// ユーザー情報取得用
+	public List<User> getAllUser(Integer userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			List<User> ret = userDao.getAllUser(connection);
+
+			commit(connection);
+
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	// 新規登録用
 	public void register(User user) {
 

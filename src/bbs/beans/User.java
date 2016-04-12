@@ -13,9 +13,6 @@ public class User implements Serializable {
 	private String departmentId;
 	private String using;
 
-	private String branchName;
-	private String departmentName;
-
 	public int getId() {
 		return id;
 	}
@@ -59,16 +56,4 @@ public class User implements Serializable {
 		this.using = using;
 	}
 
-	public String getBranchName() {
-		return branchName;
-	}
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
-	public String getDepartmentName() {
-		return departmentName;
-	}
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
-	}
 }

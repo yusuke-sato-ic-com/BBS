@@ -36,25 +36,36 @@
 
 	<label for="branch">所属支店</label>
 	<select name="branch">
-				<option>支店選択</option>
-				<c:forEach items="${branch}" var="branch">
-					<option value="${branch.branch}">${branch.branch}</option>
-				</c:forEach>
-			</select>  <br />
+		<option value="0">支店選択</option>
+		<c:forEach items="${branch}" var="branch">
+			<c:choose>
+				<c:when test="${branch.id == user.branchId}">
+					<option value="${branch.id}" selected>${branch.name}</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${branch.id}">${branch.name}</option>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</select>  <br />
 
 	<label for="department">所属部署</label>
 	<select name="department">
-		<option>部署選択</option>
-			<c:forEach items="${department}" var="department">
-				<option value="${department.department}">${department.department}</option>
-			</c:forEach>
-		</select>  <br />
+		<option value="0">部署選択</option>
+		<c:forEach items="${department}" var="department">
+			<c:choose>
+				<c:when test="${department.id == user.departmentId}">
+					<option value="${department.id}" selected>${department.name}</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${department.id}">${department.name}</option>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</select>  <br />
 	<input type="submit" value="変更" /> <br />
 <a href="userManagement">管理画面へ戻る</a>
 </form>
-
 </div>
-
-
 </body>
 </html>

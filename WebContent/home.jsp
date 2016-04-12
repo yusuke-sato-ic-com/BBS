@@ -80,11 +80,22 @@
 				<div class="text">本文：<c:out value="${message.text}" /> </div>
 				<div class="date">投稿日時：<fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
 
+				<c:forEach items="${comments}" var="comment">
+					<div class="comment">
+						<c:if test="${message.id == comment.messageId }">
+							<div class="text">message_id：<c:out value="${comment.messageId}" /> </div>
+							<div class="name">コメント投稿者：<c:out value="${user.name}"></c:out></div>
+							<div class="text">コメント：<c:out value="${comment.text}" /> </div>
+							<div class="date">投稿日時：<fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+						</c:if>
+					</div>
+				</c:forEach>
+
 				<form action="newComment" method="post"><br />
 					<label for="comment">コメントする</label> <br />
-						<input name="messageId" <%-- type="hidden" --%> value="${message.id}" id="messageId"/><br />
-						<textarea name="commentText" cols="50" rows="4" class="comment-box" >${comment.text}</textarea> <br />
-						<input type="submit" value="コメントを投稿" /> <br />
+					<input name="messageId" <%-- type="hidden" --%> value="${message.id}" id="messageId"/><br />
+					<textarea name="text" cols="50" rows="4" class="comment-box" >${comment.text}</textarea> <br />
+					<input type="submit" value="コメントを投稿" /> <br />
 				</form>
 			</div>
 		</c:forEach>

@@ -18,6 +18,7 @@ import bbs.beans.Department;
 import bbs.beans.User;
 import bbs.service.BranchService;
 import bbs.service.DepartmentService;
+import bbs.service.LoginService;
 import bbs.service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
@@ -28,8 +29,6 @@ public class SignupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
-//		Integer branchName = Integer.parseInt(request.getParameter("branch"));
-//		Integer departmentName = Integer.parseInt(request.getParameter("department"));
 		// 支店、部署のプルダウンの為のデータList
 		List<Branch> branch = new BranchService().getBranchName();
 		List<Department> department = new DepartmentService().getDepartmentName();
@@ -84,6 +83,15 @@ public class SignupServlet extends HttpServlet {
 
 		if(StringUtils.isEmpty(loginId) == true) {
 			messages.add("ログインIDを入力してください。");
+		} else if (!loginId.matches("^\\w{6,20}$")) {
+			messages.add("ログインIDは半角英数字6～20文字で入力してください。");
+		}
+
+		LoginService loginService = new LoginService();
+		User user = loginService.login(loginId);
+
+		if(user != null) {
+			messages.add("ログインIDがすでに使用されています。");
 		}
 
 		if(StringUtils.isEmpty(password) == true) {
@@ -92,10 +100,21 @@ public class SignupServlet extends HttpServlet {
 			messages.add("パスワード(確認用)も入力してください。");
 		} else if((!confirm.equals(password) == true)) {
 			messages.add("パスワードは同じものを入力してください。");
+		} else if (!password.matches("^[a-zA-Z0-9-/:-@\\[-\\`\\{-\\~]{6,20}$")) { // ^[-/:-@\[-\`\{-\~]+$
+			messages.add("パスワードは半角英数字6～20文字で入力してください。");
 		}
 
-		//TODO
-		// ログインIDがすでに使われていないかも、確認必要
+		Integer branchName = Integer.parseInt(request.getParameter("branch"));
+		Integer departmentName = Integer.parseInt(request.getParameter("department"));
+
+		if(branchName == 0) {
+			messages.add("所属支店を選択してください。");
+		}
+
+		if(departmentName == 0) {
+			messages.add("所属部署を選択してください。");
+		}
+
 		if(messages.size() == 0) {
 			return true;
 		} else {

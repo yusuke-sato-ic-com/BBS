@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import bbs.beans.User;
 import bbs.service.LoginService;
 
@@ -36,16 +38,38 @@ public class LoginServlet extends HttpServlet {
 		User user = loginService.login(loginId, password);
 
 		HttpSession session = request.getSession();
+		List<String> messages = new ArrayList<String>();
 
-		//TODO エラーメッセージの改良
-		if(user != null) {
-			session.setAttribute("loginUser", user);
-			response.sendRedirect("./"); // ホーム画面に遷移
+		if(isValid(request, messages, loginId, password) == true) {
+
+			if(user != null) {
+				session.setAttribute("loginUser", user);
+				response.sendRedirect("./"); // ホーム画面に遷移
+			} else {
+				session.setAttribute("errorMessages", messages);
+				messages.add("ログインに失敗しました");
+				response.sendRedirect("./");
+			}
 		} else {
-			List<String> messages = new ArrayList<String>();
-			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("./");
+		}
+	}
+
+	private boolean isValid(HttpServletRequest request, List<String> messages, String loginId, String password) {
+
+		if(StringUtils.isEmpty(loginId) == true) {
+			messages.add("ログインIDを入力してください。");
+		}
+
+		if(StringUtils.isEmpty(password) == true) {
+			messages.add("パスワードを入力してください。");
+		}
+
+		if(messages.size() == 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

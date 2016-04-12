@@ -123,7 +123,37 @@ public class UserDao {
 		}
 	}
 
+	// 新規登録、編集時にユーザー情報を取得
+		public User getUser(Connection connection, String loginId) {
 
+			// プリコンパイルされたSQL文を表す
+			PreparedStatement ps = null;
+			try {
+				String sql = "SELECT * FROM user WHERE login_id = ?";
+
+				// DBからデータを取得
+				ps = connection.prepareStatement(sql);
+				ps.setString(1, loginId);
+
+				// SELECTの結果セットを表す
+				ResultSet rs = ps.executeQuery();
+
+				List<User> userList = toUserList(rs);
+				if(userList.isEmpty() == true) {
+					return null;
+				} else if (2 <= userList.size()) {
+					throw new IllegalStateException("2 <= userList.size()");
+				} else {
+					return userList.get(0);
+				}
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+		}
+
+	// ログイン時にユーザー情報を取得
 	public User getUser(Connection connection, String loginId, String password) {
 
 		// プリコンパイルされたSQL文を表す

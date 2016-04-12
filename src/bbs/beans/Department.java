@@ -5,20 +5,20 @@ import java.io.Serializable;
 public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int departmentId;
-	private String departmentName;
+	private int id;
+	private String name;
 
-	public int getDepartmentId() {
-		return departmentId;
+	public int getId() {
+		return id;
 	}
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getDepartmentName() {
-		return departmentName;
+	public String getName() {
+		return name;
 	}
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

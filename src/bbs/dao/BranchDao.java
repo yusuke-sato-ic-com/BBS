@@ -43,8 +43,8 @@ public class BranchDao {
 				String name = rs.getString("name");
 
 				Branch branch = new Branch();
-				branch.setBranchId(id);
-				branch.setBranchName(name);
+				branch.setId(id);
+				branch.setName(name);
 
 				ret.add(branch);
 			}

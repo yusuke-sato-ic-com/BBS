@@ -43,12 +43,15 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
+		System.out.println("branch_id : " + (request.getParameter("branch")));
+		System.out.println("department_id : " + (request.getParameter("department")));
+
 		User user = new User();
+		user.setName(request.getParameter("name"));
 		user.setLoginId(request.getParameter("loginId"));
 		user.setPassword(request.getParameter("password"));
-		user.setName(request.getParameter("name"));
-		user.setBranchId(request.getParameter("branchId"));
-		user.setDepartmentId(request.getParameter("departmentId"));
+		user.setBranchId(request.getParameter("branch"));
+		user.setDepartmentId(request.getParameter("department"));
 
 		List<Branch> branch = new BranchService().getBranchName();
 		List<Department> department = new DepartmentService().getDepartmentName();
@@ -69,13 +72,20 @@ public class SignupServlet extends HttpServlet {
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
+
+		String name = request.getParameter("name");
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String confirm = request.getParameter("confirm");
 
+		if(StringUtils.isEmpty(name) == true) {
+			messages.add("名前を入力してください。");
+		}
+
 		if(StringUtils.isEmpty(loginId) == true) {
 			messages.add("ログインIDを入力してください。");
 		}
+
 		if(StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください。");
 		} else if(StringUtils.isEmpty(confirm) == true) {

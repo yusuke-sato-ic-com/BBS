@@ -43,8 +43,8 @@ public class DepartmentDao {
 				String name = rs.getString("name");
 
 				Department department = new Department();
-				department.setDepartmentId(id);
-				department.setDepartmentName(name);
+				department.setId(id);
+				department.setName(name);
 
 				ret.add(department);
 			}

@@ -5,20 +5,22 @@ import java.io.Serializable;
 public class Branch implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int branchId;
-	private String branchName;
+	private int id;
+	private String name;
 
-	public int getBranchId() {
-		return branchId;
+	public int getId() {
+		return id;
 	}
-	public void setBranchId(int branchId) {
-		this.branchId = branchId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getBranchName() {
-		return branchName;
+
+	public String getName() {
+		return name;
 	}
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 }

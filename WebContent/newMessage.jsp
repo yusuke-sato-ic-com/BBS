@@ -28,15 +28,7 @@
 
 	<label for="category">カテゴリー</label> <br />
 	<input name="category" value="${message.category}"  id="title"/><br />
-<%--	<label for="category">カテゴリー</label> <br />
-		<select name="category">
-			<option value="">カテゴリーを選択して下さい</option>
-			<option value="1">お知らせ</option>
-			<option value="2">本部より</option>
-			<option value="3">技術部より</option>
-			<option value="4">その他</option>
-		</select> <br>
- --%>
+
 	<label for="text">本文</label> <br />
 	<textarea name="text" cols="50" rows="20" class="text-box" >${message.text}</textarea> <br />
 

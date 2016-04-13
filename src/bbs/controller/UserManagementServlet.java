@@ -26,4 +26,23 @@ public class UserManagementServlet extends HttpServlet {
 		request.getRequestDispatcher("userManagement.jsp").forward(request, response);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			 throws IOException, ServletException {
+
+		// ユーザー停止・復活機能の実装
+		Integer userId = Integer.parseInt(request.getParameter("user_id"));
+		Integer using;
+
+		if(request.getParameter("using").equals("ON")) {
+			using = 0;
+		} else {
+			using = 1;
+		}
+
+		new UserService().editor(userId, using);
+		response.sendRedirect("userManagement");
+
+	}
+
 }

@@ -25,7 +25,7 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
-掲示板課題<br />
+掲示板<br />
 		<form action="login" method="post"><br />
 			<label for="loginId">ログインID</label>
 			<input name="loginId" id="loginId"/> <br />

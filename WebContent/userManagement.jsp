@@ -7,6 +7,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー管理</title>
+<script type="text/javascript">
+<!--
+function offDisp(){
+	if(window.confirm('本当に停止してよろしいですか？')){
+		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+	} else {
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+	}
+}
+// -->
+
+<!--
+function onDisp(){
+	if(window.confirm('本当に復活させてよろしいですか？')){
+		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+	} else {
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+	}
+}
+// -->
+</script>
 </head>
 <body>
 
@@ -24,9 +45,15 @@
 				<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
 			</div>
 			<div class="user"><c:out value="${user.loginId}" /> </div>
-			<%-- 利用状況を表示する --%>
-			<form action="" method="post">
-				<input type="submit" value="ON" /> <br />
+			<form action="userManagement?user_id=${user.id}" method="post">
+					<c:choose>
+						<c:when test="${user.using == 1 }">
+							<input name="using" type="submit" value="ON"  onClick="offDisp()"/><br />
+						</c:when>
+						<c:otherwise>
+							<input name="using" type="submit" value="OFF" onClick="onDisp()"/><br />
+						</c:otherwise>
+					</c:choose>
 			</form>
 			</div>
 	</c:forEach>

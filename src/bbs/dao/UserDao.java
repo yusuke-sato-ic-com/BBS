@@ -15,6 +15,29 @@ import bbs.exception.SQLRuntimeException;
 public class UserDao {
 
 	// ユーザー編集で入力されたデータでDB更新
+		public void updateUsing(Connection connection, Integer userId, Integer using) {
+
+			PreparedStatement ps = null;
+			try {
+				StringBuilder sql = new StringBuilder();
+				sql.append("UPDATE user SET ");
+				sql.append("`using` = ? ");
+				sql.append("WHERE id = ?");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setInt(1, using);
+				ps.setInt(2, userId);
+
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+		}
+
+	// ユーザー編集で入力されたデータでDB更新
 	public void update(Connection connection, User user, Integer userId) {
 
 		PreparedStatement ps = null;
@@ -104,7 +127,7 @@ public class UserDao {
 				String password = rs.getString("password");
 				String branchId = rs.getString("branch");
 				String departmentId = rs.getString("department");
-				String using = rs.getString("using");
+				int using = rs.getInt("using");
 
 				User user = new User();
 				user.setId(id);
@@ -195,7 +218,7 @@ public class UserDao {
 				String password = rs.getString("password");
 				String branchId = rs.getString("branch");
 				String departmentId = rs.getString("department");
-				String using = rs.getString("using");
+				int using = rs.getInt("using");
 
 				User user = new User();
 				user.setId(id);

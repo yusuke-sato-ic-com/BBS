@@ -42,12 +42,12 @@ public class LoginServlet extends HttpServlet {
 
 		if(isValid(request, messages, loginId, password) == true) {
 
-			if(user != null) {
-				session.setAttribute("loginUser", user);
-				response.sendRedirect("./"); // ホーム画面に遷移
-			} else {
+			if(user == null || user.getUsing() == 0) {
 				session.setAttribute("errorMessages", messages);
 				messages.add("ログインに失敗しました");
+				response.sendRedirect("./");
+			} else {
+				session.setAttribute("loginUser", user);
 				response.sendRedirect("./");
 			}
 		} else {

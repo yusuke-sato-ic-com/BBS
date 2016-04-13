@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private String password;
 	private String branchId;
 	private String departmentId;
-	private String using;
+	private int using; // trueかfalseで判断するときはboolean型にする
 
 	public int getId() {
 		return id;
@@ -49,10 +49,10 @@ public class User implements Serializable {
 	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
 	}
-	public String isUsing() {
+	public int getUsing() {
 		return using;
 	}
-	public void setUsing(String using) {
+	public void setUsing(int using) {
 		this.using = using;
 	}
 

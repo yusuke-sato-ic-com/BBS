@@ -15,11 +15,12 @@ import bbs.exception.SQLRuntimeException;
 
 public class CommentDao {
 
+	// コメント一覧を取得
 	public List<Comment> getComments (Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM bbs.comment";
+			String sql = "SELECT  comment.*, user.name FROM user, comment WHERE user.id = comment.user_id ORDER BY insert_date;";
 			// DBからデータを取得
 			ps = connection.prepareStatement(sql);
 			// SELECTの結果セットを表す
@@ -38,15 +39,19 @@ public class CommentDao {
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("id");
+				int userId = rs.getInt("user_id");
 				int messageId = rs.getInt("message_id");
 				String text = rs.getString("text");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
+				String name = rs.getString("name");
 
 				Comment comment = new Comment();
 				comment.setId(id);
+				comment.setUserId(userId);
 				comment.setMessageId(messageId);
 				comment.setText(text);
 				comment.setInsertDate(insertDate);
+				comment.setName(name);
 
 				ret.add(comment);
 			}
@@ -56,6 +61,7 @@ public class CommentDao {
 		}
 	}
 
+	// コメントをDBに登録
 	public void insert(Connection connection, Comment comment) {
 
 		PreparedStatement ps = null;

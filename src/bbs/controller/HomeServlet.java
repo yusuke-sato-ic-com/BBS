@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import bbs.beans.Comment;
 import bbs.beans.Message;
-import bbs.beans.User;
 import bbs.beans.UserMessage;
 import bbs.service.CommentService;
 import bbs.service.MessageService;
-import bbs.service.UserService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
 public class HomeServlet extends HttpServlet {
@@ -27,9 +25,6 @@ public class HomeServlet extends HttpServlet {
 
 		// プルダウン用カテゴリー一覧
 		List<Message> category = new MessageService().getCategory();
-
-		// コメント投稿者取得用
-		List<User> user  = new UserService().getAllUser();
 
 		// 投稿、コメント一覧
 		List<UserMessage> messages = new MessageService().getMessage();
@@ -43,7 +38,7 @@ public class HomeServlet extends HttpServlet {
 				messages =  new MessageService().getMessage(categoryName);
 			}
 		}
-//		request.setAttribute("user", user);
+
 		request.setAttribute("comments", comments);
 		request.setAttribute("category", category);
 		request.setAttribute("messages", messages);

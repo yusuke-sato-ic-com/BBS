@@ -12,6 +12,7 @@ public class Comment implements Serializable {
 	private String text;
 	private Date insertDate;
 	private Date updateDate;
+	private String name;
 
 	public int getId() {
 		return id;
@@ -50,4 +51,10 @@ public class Comment implements Serializable {
 		this.updateDate = updateDate;
 	}
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -15,6 +15,7 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserMessageDao {
 
+	// カテゴリー別の投稿メッセージ一覧を取得
 	public List<UserMessage> getCategoryMessages(Connection connection, int num, String categoryName) {
 
 		PreparedStatement ps = null;
@@ -64,6 +65,7 @@ public class UserMessageDao {
 		}
 	}
 
+	// 投稿メッセージの一覧を取得
 	public List<UserMessage> getUserMessages(Connection connection, int num) {
 
 		PreparedStatement ps = null;

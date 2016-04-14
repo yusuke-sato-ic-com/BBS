@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			 throws IOException, ServletException {
 
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	@Override
@@ -45,14 +45,14 @@ public class LoginServlet extends HttpServlet {
 			if(user == null || user.getUsing() == 0) {
 				session.setAttribute("errorMessages", messages);
 				messages.add("ログインに失敗しました");
-				response.sendRedirect("./");
+				response.sendRedirect("login");
 			} else {
 				session.setAttribute("loginUser", user);
 				response.sendRedirect("./");
 			}
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
+			response.sendRedirect("login");
 		}
 	}
 

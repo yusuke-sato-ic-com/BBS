@@ -14,6 +14,33 @@ import bbs.exception.SQLRuntimeException;
 
 public class MessageDao {
 
+	public void delete(Connection connection, Integer userId, Integer messageId) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE INTO message ( ");
+			sql.append("user_id");
+			sql.append(", title");
+
+			sql.append("?");
+			sql.append(", ?");
+			sql.append(")");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, userId);
+			ps.setInt(2, messageId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
 	public List<Message> getCategory (Connection connection) {
 
 		PreparedStatement ps = null;

@@ -11,9 +11,9 @@
 <!--
 function offDisp(){
 	if(window.confirm('本当に停止してよろしいですか？')){
-		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+		return true;
 	} else {
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false;
 	}
 }
 // -->
@@ -21,9 +21,9 @@ function offDisp(){
 <!--
 function onDisp(){
 	if(window.confirm('本当に復活させてよろしいですか？')){
-		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+		return true;
 	} else {
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false;
 	}
 }
 // -->
@@ -40,22 +40,27 @@ function onDisp(){
 利用状況と編集画面<br />
 
 <c:forEach items="${user}" var="user">
+	<div class="user">
 		<div class="user">
-			<div class="user">
-				<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
-			</div>
-			<div class="user"><c:out value="${user.loginId}" /> </div>
-			<form action="userManagement?user_id=${user.id}" method="post">
-					<c:choose>
-						<c:when test="${user.using == 1 }">
-							<input name="using" type="submit" value="ON"  onClick="offDisp()"/><br />
-						</c:when>
-						<c:otherwise>
-							<input name="using" type="submit" value="OFF" onClick="onDisp()"/><br />
-						</c:otherwise>
-					</c:choose>
-			</form>
-			</div>
-	</c:forEach>
+			<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
+		</div>
+		<div class="user"><c:out value="${user.loginId}" /> </div>
+
+		<c:choose>
+			<c:when test="${user.using == 1 }">
+				<form action="userManagement" onSubmit="return offDisp()" method="post">
+					<input name="user_id" type="hidden" value="${user.id}"/>
+					<input name="using" type="submit" value="ON" /><br />
+				</form>
+			</c:when>
+			<c:otherwise>
+				<form action="userManagement" onSubmit="return onDisp()" method="post">
+					<input name="user_id" type="hidden" value="${user.id}"/>
+					<input name="using" type="submit" value="OFF" /><br />
+				</form>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</c:forEach>
 </body>
 </html>

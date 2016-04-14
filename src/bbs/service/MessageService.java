@@ -13,6 +13,27 @@ import bbs.dao.UserMessageDao;
 
 public class MessageService {
 
+	// 投稿メッセージをDBから削除
+	public void deleteMessage(Integer userId, Integer messageId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			MessageDao messageDao = new MessageDao();
+			messageDao.delete(connection, userId, messageId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	// DBからカテゴリーを取得
 	public List<Message> getCategory() {

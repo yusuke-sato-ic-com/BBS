@@ -24,18 +24,6 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-
-掲示板<br />
-		<form action="login" method="post"><br />
-			<label for="loginId">ログインID</label>
-			<input name="loginId" id="loginId"/> <br />
-
-			<label for="password">パスワード</label>
-			<input name="password" type="password" id="password"/> <br />
-
-			<input type="submit" value="ログイン" /> <br />
-		</form>
-
 	</c:if>
 	<c:if test="${ not empty loginUser }">
 		<a href="newMessage">新規投稿</a>
@@ -52,7 +40,7 @@
 		<form><br />
 			<label for="category">カテゴリーで絞り込む</label>
 			<select name="category">
-				<option>カテゴリー選択</option>
+				<option>すべて</option>
 				<c:forEach items="${category}" var="category">
 					<option value="${category.category}">${category.category}</option>
 				</c:forEach>
@@ -79,6 +67,13 @@
 				<div class="title">件名：<c:out value="${message.title}" /> </div>
 				<div class="text">本文：<c:out value="${message.text}" /> </div>
 				<div class="date">投稿日時：<fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> <br /> </div>
+				<c:if test="${message.userId == loginUser.id}">
+					<form method="post"><br />
+						<input name="loginUserId" <%--type="hidden" --%> value="${loginUser.id}" id="loginUserId"/>
+						<input name="messageId" <%--type="hidden" --%> value="${message.id}" id="messageId"/>
+						<input type="submit" value="投稿を削除" /> <br />
+					</form>
+				</c:if>
 
 				<c:forEach items="${comments}" var="comment">
 					<div class="comment">
@@ -86,6 +81,12 @@
 							<div class="name">コメント投稿者：<c:out value="${comment.name}"/></div>
 							<div class="text">コメント：<c:out value="${comment.text}" /> </div>
 							<div class="date">投稿日時：<fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+							<c:if test="${comment.userId == loginUser.id}">
+								<form method="post"><br />
+									<input name="loginUserId" <%--type="hidden" --%> value="${loginUser.id}" id="loginUserId"/>
+									<input type="submit" value="コメントを削除" /> <br />
+								</form>
+							</c:if>
 							<br />
 						</c:if>
 					</div>

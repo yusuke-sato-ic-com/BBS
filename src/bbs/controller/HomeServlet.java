@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
 
 		if (request.getParameter("category") != null){
 			String categoryName = request.getParameter("category");
-			if(categoryName.equals("カテゴリー選択")) {
+			if(categoryName.equals("すべて")) {
 				categoryName = null;
 			} else {
 				messages =  new MessageService().getMessage(categoryName);
@@ -45,5 +45,24 @@ public class HomeServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
+
+//	@Override
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//			 throws IOException, ServletException {
+//
+//		//TODO 投稿削除機能の実装
+//
+//		//
+//		Integer userId = Integer.parseInt(request.getParameter("loginUserId")); // ログイン中のユーザーID
+//		Integer messageId = Integer.parseInt(request.getParameter("messageId")); // 削除対象のmessageID
+//
+//		System.out.println(userId);
+//		System.out.println(messageId);
+//
+//		new MessageService().deleteMessage(userId,messageId);
+//		response.sendRedirect("./");
+//
+//
+//	}
 
 }

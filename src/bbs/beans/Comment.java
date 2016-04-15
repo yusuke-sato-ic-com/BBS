@@ -13,6 +13,8 @@ public class Comment implements Serializable {
 	private Date insertDate;
 	private Date updateDate;
 	private String name;
+	private int branchId;
+	private int departmentId;
 
 	public int getId() {
 		return id;
@@ -56,5 +58,18 @@ public class Comment implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+	public int getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 }

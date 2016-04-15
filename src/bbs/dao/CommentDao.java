@@ -15,12 +15,52 @@ import bbs.exception.SQLRuntimeException;
 
 public class CommentDao {
 
+
+	public void deleteCommentsOfMessage(Connection connection, Integer messageId) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM comment WHERE message_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, messageId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public void deleteComment(Connection connection, Integer commentId) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM comment WHERE id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, commentId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
 	// コメント一覧を取得
 	public List<Comment> getComments (Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT  comment.*, user.name FROM user, comment WHERE user.id = comment.user_id ORDER BY insert_date;";
+			String sql = "SELECT  comment.*, user.name, user.branch AS branch_id, user.department AS department_id FROM user, comment WHERE user.id = comment.user_id ORDER BY insert_date;";
 			// DBからデータを取得
 			ps = connection.prepareStatement(sql);
 			// SELECTの結果セットを表す

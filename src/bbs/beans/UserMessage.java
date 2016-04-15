@@ -13,6 +13,9 @@ public class UserMessage implements Serializable {
 	private String category;
 	private String text;
 	private Date insertDate;
+	private int branchId;
+	private int departmentId;
+
 
 	public String getName() {
 		return name;
@@ -61,6 +64,21 @@ public class UserMessage implements Serializable {
 	}
 	public void setInsertDate(Date insertDate) {
 		this.insertDate = insertDate;
+	}
+
+
+	public int getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
 }

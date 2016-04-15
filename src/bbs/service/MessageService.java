@@ -14,16 +14,40 @@ import bbs.dao.UserMessageDao;
 public class MessageService {
 
 	// 投稿メッセージをDBから削除
-	public void deleteMessage(Integer userId, Integer messageId) {
+	public void deleteMessage(Integer messageId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			MessageDao messageDao = new MessageDao();
-			messageDao.delete(connection, userId, messageId);
+			messageDao.delete(connection, messageId);
 
 			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	// DBからカテゴリーを取得
+	public List<Message> getDate() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			MessageDao messageDao = new MessageDao();
+			List<Message> ret = messageDao.getDate(connection);
+
+			commit(connection);
+
+			return ret;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

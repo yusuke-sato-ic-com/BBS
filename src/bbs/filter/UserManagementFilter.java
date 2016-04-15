@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import bbs.beans.User;
 
-@WebFilter(urlPatterns ={"/signup","/userEdit","/userManagement"}) // どのURLに対してか
+@WebFilter(urlPatterns ={"/signup","/userEdit","/userManagement","/signup.jsp","/userEdit.jsp","/userManagement.jsp"}) // どのURLに対してか
 public class UserManagementFilter implements Filter {
 
 	@Override
@@ -33,7 +33,6 @@ public class UserManagementFilter implements Filter {
 		List<String> messages = new ArrayList<String>();
 
 		User loginUser =  (User) session.getAttribute("loginUser");
-
 
 		if(!(loginUser.getDepartmentId()).equals("1")) {
 			// 未承認の場合

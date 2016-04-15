@@ -14,6 +14,10 @@ public class Message implements Serializable {
 	private Date insertDate;
 	private Date updateDate;
 
+	private String minDate;
+	private String maxDate;
+
+
 	public int getId() {
 		return id;
 	}
@@ -63,4 +67,16 @@ public class Message implements Serializable {
 		this.updateDate = updateDate;
 	}
 
+	public String getMinDate() {
+		return minDate;
+	}
+	public void setMinDate(String minDate) {
+		this.minDate = minDate;
+	}
+	public String getMaxDate() {
+		return maxDate;
+	}
+	public void setMaxDate(String maxDate) {
+		this.maxDate = maxDate;
+	}
 }

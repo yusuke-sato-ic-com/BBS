@@ -3,6 +3,7 @@ package bbs.dao;
 import static bbs.utils.CloseableUtil.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,23 +15,16 @@ import bbs.exception.SQLRuntimeException;
 
 public class MessageDao {
 
-	public void delete(Connection connection, Integer userId, Integer messageId) {
+	public void delete(Connection connection, Integer messageId) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("DELETE INTO message ( ");
-			sql.append("user_id");
-			sql.append(", title");
-
-			sql.append("?");
-			sql.append(", ?");
-			sql.append(")");
+			sql.append("DELETE FROM message WHERE id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, userId);
-			ps.setInt(2, messageId);
+			ps.setInt(1, messageId);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -40,6 +34,39 @@ public class MessageDao {
 		}
 	}
 
+	public List<Message> getDate (Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT min(insert_date) as min, max(insert_date) as max FROM bbs.message";
+			// DBからデータを取得
+			ps = connection.prepareStatement(sql);
+			// SELECTの結果セットを表す
+			ResultSet rs = ps.executeQuery();
+			List<Message> ret = toDateList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<Message> toDateList(ResultSet rs) throws SQLException {
+		List<Message> ret = new ArrayList<Message>();
+		try {
+			Date minDate = rs.getDate("min");
+			Date maxDate = rs.getDate("max");
+
+//			Message Date = new Message();
+//			Date.setMinDate(minDate);
+//			Date.setMaxDate(maxDate);
+//			ret.add(Date);
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
 
 	public List<Message> getCategory (Connection connection) {
 

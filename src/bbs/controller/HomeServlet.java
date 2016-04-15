@@ -26,11 +26,40 @@ public class HomeServlet extends HttpServlet {
 		// プルダウン用カテゴリー一覧
 		List<Message> category = new MessageService().getCategory();
 
+		System.out.println(category.get(0).getCategory());
+
 		// 投稿、コメント一覧
 		List<UserMessage> messages = new MessageService().getMessage();
 		List<Comment> comments = new CommentService().getComment();
 
-		if (request.getParameter("category") != null){
+		// DBのminDate,maxDateを取得
+		List<Message> date = new MessageService().getDate();
+
+//		System.out.println(date.get(0).getMinDate());
+//		System.out.println(date.get(0).getMaxDate());
+//
+//
+//		String fromDate = date.get(0).getMinDate();
+//		String toDate = date.get(0).getMaxDate();
+
+//		System.out.println(fromDate);
+//		System.out.println(toDate);
+
+//		if(request.getParameter("fromDate") != null) {
+//			String fromDate = request.getParameter("fromDate");
+//		} else {
+//			String fromDate = minDate;
+//		}
+//		messages =  new MessageService().getMessage(fromDate);
+//
+//		if(request.getParameter("toDate") != null) {
+//			String toDate = request.getParameter("toDate");
+//		} else {
+//			String toDate = maxDate;
+//		}
+//		messages =  new MessageService().getMessage(toDate);
+
+		if(request.getParameter("category") != null){
 			String categoryName = request.getParameter("category");
 			if(categoryName.equals("すべて")) {
 				categoryName = null;
@@ -46,23 +75,25 @@ public class HomeServlet extends HttpServlet {
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
 
-//	@Override
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			 throws IOException, ServletException {
-//
-//		//TODO 投稿削除機能の実装
-//
-//		//
-//		Integer userId = Integer.parseInt(request.getParameter("loginUserId")); // ログイン中のユーザーID
-//		Integer messageId = Integer.parseInt(request.getParameter("messageId")); // 削除対象のmessageID
-//
-//		System.out.println(userId);
-//		System.out.println(messageId);
-//
-//		new MessageService().deleteMessage(userId,messageId);
-//		response.sendRedirect("./");
-//
-//
-//	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			 throws IOException, ServletException {
+
+		//投稿削除機能
+		if (request.getParameter("messageId") != null){ // 削除対象のmessageID
+			Integer messageId = Integer.parseInt(request.getParameter("messageId"));
+			new MessageService().deleteMessage(messageId);
+			new CommentService().deleteCommentsOfMessage(messageId); // 対応するコメントも削除
+		}
+
+		if (request.getParameter("commentId") != null){ // 削除対象のcommentID
+			Integer commentId = Integer.parseInt(request.getParameter("commentId"));
+			new CommentService().deleteComment(commentId);
+		}
+
+		response.sendRedirect("./");
+
+
+	}
 
 }

@@ -55,6 +55,7 @@ public class MessageDao {
 	private List<Message> toDateList(ResultSet rs) throws SQLException {
 		List<Message> ret = new ArrayList<Message>();
 		try {
+			//TODO
 			Date minDate = rs.getDate("min");
 			Date maxDate = rs.getDate("max");
 

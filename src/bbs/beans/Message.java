@@ -66,7 +66,6 @@ public class Message implements Serializable {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-
 	public String getMinDate() {
 		return minDate;
 	}
@@ -79,4 +78,6 @@ public class Message implements Serializable {
 	public void setMaxDate(String maxDate) {
 		this.maxDate = maxDate;
 	}
+
+
 }

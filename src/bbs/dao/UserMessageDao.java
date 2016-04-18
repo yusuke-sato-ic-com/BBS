@@ -15,17 +15,38 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserMessageDao {
 
-	// カテゴリー別の投稿メッセージ一覧を取得
-	public List<UserMessage> getCategoryMessages(Connection connection, int num, String categoryName) {
+	// 絞り込みの投稿メッセージ一覧を取得
+	public List<UserMessage> getRefineMessages(Connection connection, int num, String categoryName, String fromDate, String toDate) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM user_message WHERE category = ? ");
-			sql.append("ORDER BY insert_date DESC limit " + num);
+			if(categoryName == null) {
+				sql.append("SELECT * FROM user_message WHERE");
+				sql.append(" date(insert_date) BETWEEN ?");
+				sql.append(" AND ?");
+				sql.append(" ORDER BY insert_date DESC limit " + num);
 
-			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, categoryName);
+				ps = connection.prepareStatement(sql.toString());
+				ps.setString(1, fromDate);
+				ps.setString(2, toDate);
+
+			} else {
+				sql.append("SELECT * FROM user_message WHERE category = ?");
+				sql.append(" AND date(insert_date) BETWEEN ?");
+				sql.append(" AND ?");
+				sql.append(" ORDER BY insert_date DESC limit " + num);
+
+				ps = connection.prepareStatement(sql.toString());
+				ps.setString(1, categoryName);
+				ps.setString(2, fromDate);
+				ps.setString(3, toDate);
+			}
+
+			System.out.println(ps.toString());
+//			System.out.println(categoryName);
+//			System.out.println(fromDate);
+//			System.out.println(toDate);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

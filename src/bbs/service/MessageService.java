@@ -110,14 +110,14 @@ public class MessageService {
 	}
 
 	// DBからカテゴリー検索用の投稿メッセージを取得
-	public List<UserMessage> getMessage(String categoryName) {
+	public List<UserMessage> getMessage(String categoryName, String fromDate, String toDate) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserMessageDao messageDao = new UserMessageDao();
-			List<UserMessage> ret = messageDao.getCategoryMessages(connection, LIMIT_NUM, categoryName);
+			List<UserMessage> ret = messageDao.getRefineMessages(connection, LIMIT_NUM, categoryName, fromDate, toDate);
 
 			commit(connection);
 

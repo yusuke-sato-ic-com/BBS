@@ -7,6 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー管理</title>
+
+
+<style>
+body{
+background: #f0e68c;
+font-family: Meiryo;
+}
+
+div {
+background: #ffffff;
+
+
+}
+
+</style>
+
 <script type="text/javascript">
 <!--
 function offDisp(){
@@ -36,15 +52,12 @@ function onDisp(){
 <a href="./">ホームへ戻る</a> <br />
 </div>
 
-ユーザー管理画面実装中<br />
-利用状況と編集画面<br />
-
 <c:forEach items="${user}" var="user">
 	<div class="user">
 		<div class="user">
 			<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
 		</div>
-		<div class="user"><c:out value="${user.loginId}" /> </div>
+		<div class="user"><c:out value="${user.loginId}" /></div>
 
 		<c:choose>
 			<c:when test="${user.using == 1 }">

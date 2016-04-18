@@ -3,10 +3,11 @@ package bbs.dao;
 import static bbs.utils.CloseableUtil.*;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,14 +56,19 @@ public class MessageDao {
 	private List<Message> toDateList(ResultSet rs) throws SQLException {
 		List<Message> ret = new ArrayList<Message>();
 		try {
-			//TODO
-			Date minDate = rs.getDate("min");
-			Date maxDate = rs.getDate("max");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			while (rs.next()) {
+			String minDate = df.format(rs.getDate("min"));
+			String maxDate = df.format(rs.getDate("max"));
 
-//			Message Date = new Message();
-//			Date.setMinDate(minDate);
-//			Date.setMaxDate(maxDate);
-//			ret.add(Date);
+//			System.out.println("minDate : " + minDate);
+//			System.out.println("maxDate : " + maxDate);
+
+			Message Date = new Message();
+			Date.setMinDate(minDate);
+			Date.setMaxDate(maxDate);
+			ret.add(Date);
+			}
 			return ret;
 		} finally {
 			close(rs);

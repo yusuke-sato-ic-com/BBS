@@ -26,8 +26,6 @@ public class HomeServlet extends HttpServlet {
 		// プルダウン用カテゴリー一覧
 		List<Message> category = new MessageService().getCategory();
 
-		System.out.println(category.get(0).getCategory());
-
 		// 投稿、コメント一覧
 		List<UserMessage> messages = new MessageService().getMessage();
 		List<Comment> comments = new CommentService().getComment();
@@ -35,37 +33,39 @@ public class HomeServlet extends HttpServlet {
 		// DBのminDate,maxDateを取得
 		List<Message> date = new MessageService().getDate();
 
-//		System.out.println(date.get(0).getMinDate());
-//		System.out.println(date.get(0).getMaxDate());
-//
-//
-//		String fromDate = date.get(0).getMinDate();
-//		String toDate = date.get(0).getMaxDate();
+		String minDate = date.get(0).getMinDate();
+		String maxDate = date.get(0).getMaxDate();
 
-//		System.out.println(fromDate);
-//		System.out.println(toDate);
+//		System.out.println("DaoMinDate : " + minDate);
+//		System.out.println("DaoMaxDate : " + maxDate);
 
-//		if(request.getParameter("fromDate") != null) {
-//			String fromDate = request.getParameter("fromDate");
-//		} else {
-//			String fromDate = minDate;
-//		}
-//		messages =  new MessageService().getMessage(fromDate);
-//
-//		if(request.getParameter("toDate") != null) {
-//			String toDate = request.getParameter("toDate");
-//		} else {
-//			String toDate = maxDate;
-//		}
-//		messages =  new MessageService().getMessage(toDate);
+//		System.out.println(request.getParameter("fromDate"));
+//		System.out.println(request.getParameter("toDate"));
 
+		String fromDate;
+		if(request.getParameter("fromDate") == "") {
+			fromDate = minDate;
+		} else {
+			fromDate = (request.getParameter("fromDate"));
+		}
+//		System.out.println("fromDate : " + fromDate);
+
+		String toDate;
+		if(request.getParameter("toDate") == "") {
+			toDate = maxDate;
+		} else {
+			toDate = (request.getParameter("toDate"));
+		}
+//		System.out.println("toDate : " + toDate);
+
+		String categoryName;
 		if(request.getParameter("category") != null){
-			String categoryName = request.getParameter("category");
+			categoryName = request.getParameter("category");
+			//TODO すべての部分をなんとかする、
 			if(categoryName.equals("すべて")) {
 				categoryName = null;
-			} else {
-				messages =  new MessageService().getMessage(categoryName);
 			}
+			messages =  new MessageService().getMessage(categoryName, fromDate, toDate);
 		}
 
 		request.setAttribute("comments", comments);

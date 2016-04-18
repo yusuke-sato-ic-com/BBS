@@ -8,6 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ホーム</title>
+
+<style>
+body{
+background: #f0e68c;
+font-family: Meiryo;
+}
+
+div {
+background: #ffffff;
+text-align: center;
+
+}
+
+</style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
@@ -19,6 +34,7 @@
 $(function () {
     $("#fromDate").datepicker({
     	dateFormat:"yy-mm-dd",
+    	maxDate: new Date(),
         onSelect: function (selectedDate) {
             $("#fromDate").datepicker("option", "showOn", 'button');
             $("#fromDate").datepicker("option", option, selectedDate);
@@ -47,7 +63,7 @@ $(function () {
 			<div class="errorMessages">
 				<ul> <%-- <ul>は順序のないリストを表示する歳際に使用する。順序のあるリスト表示は<ol> --%>
 					<c:forEach items="${errorMessages}" var="messages"> <%-- 配列をループ処理 --%>
-						<li><c:out value="${messages}" />
+						<h3><li><c:out value="${messages}" /><h3>
 					</c:forEach>
 				</ul>
 			</div>

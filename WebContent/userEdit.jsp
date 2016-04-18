@@ -7,6 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー編集</title>
+
+
+<style>
+body{
+background: #f0e68c;
+font-family: Meiryo;
+}
+
+div {
+background: #ffffff;
+text-align: center;
+
+}
+
+</style>
+
 </head>
 <body>
 <div class="main-contents">

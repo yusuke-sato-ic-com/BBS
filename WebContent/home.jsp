@@ -7,21 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>ホーム</title>
-
-<style>
-body{
-background: #f0e68c;
-font-family: Meiryo;
-}
-
-div {
-background: #ffffff;
-text-align: center;
-
-}
-
-</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
@@ -56,61 +43,65 @@ $(function () {
 <body>
 
 <div class="main-contents">
-
-<div class="header">
 	<c:if test="${empty loginUser }">
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
 				<ul> <%-- <ul>は順序のないリストを表示する歳際に使用する。順序のあるリスト表示は<ol> --%>
 					<c:forEach items="${errorMessages}" var="messages"> <%-- 配列をループ処理 --%>
-						<h3><li><c:out value="${messages}" /><h3>
+						<center><font size="4" color="#ff0000"><c:out value="${messages}" /></font></center>
 					</c:forEach>
 				</ul>
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 	</c:if>
-	<c:if test="${ not empty loginUser }">
-		<a href="newMessage">新規投稿</a>
-		<c:if test="${(loginUser.departmentId) == 1 }">
-			<a href="userManagement">ユーザー管理</a>
+
+	<div id="menu">
+		<c:if test="${ not empty loginUser }">
+			<p><a href="newMessage">新規投稿</a>&nbsp;
+			<c:if test="${(loginUser.departmentId) == 1 }">
+				<a href="userManagement">ユーザー管理</a>&nbsp;
+			</c:if>
+			<a href="logout">ログアウト</a></p>&nbsp;
+			<div class="home-name"><c:out value="${loginUser.name}"/>&nbsp;</div>
 		</c:if>
-		<a href="logout">ログアウト</a>
-		<div class="name"><h2><c:out value="${loginUser.name}"/></h2></div>
-	</c:if>
+	</div>
 </div>
 
 <div class="messages">
-	<form><br />
-		<label for="fromDate">日付範囲</label>
-		<input name="fromDate" type="text" id="fromDate" placeholder="クリックしてください"/>
 
-		<label for="toDate">～</label>
-		<input name="toDate" type="text" id="toDate" placeholder="クリックしてください"/> <br >
+	<div id="refine-search">
+		<form>
+			<p><label for="fromDate">日付範囲</label>
+			<input name="fromDate" type="text" id="fromDate" placeholder="From"/>
+			<label for="toDate">～</label>
+			<input name="toDate" type="text" id="toDate" placeholder="To"/>
+			<label for="category">カテゴリー</label>
+			<select name="category">
+				<option>すべて</option>
+					<c:forEach items="${category}" var="category">
+						<option value="${category.category}">${category.category}</option>
+					</c:forEach>
+			</select></p>
+			<p class="home-submit"><input type="submit" value="検索" /></p>
+		</form>
+	</div>
 
-		<label for="category">カテゴリー</label>
-		<select name="category">
-			<option>すべて</option>
-			<c:forEach items="${category}" var="category">
-				<option value="${category.category}">${category.category}</option>
-			</c:forEach>
-		</select>
-	<input type="submit" value="検索" /> <br />
-	</form>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
 				<c:forEach items="${errorMessages}" var="messages">
-					<li><c:out value="${messages}"/>
+					<font size="4" color="#ff0000"><c:out value="${messages}" /><br /></font>
 				</c:forEach>
 			</ul>
 		</div>
 		<c:remove var="errorMessages" scope="session" />
 	</c:if>
 
+	<div id="message-comment">
 	<c:forEach items="${messages}" var="message">
 		<div class="message">
-			<div class="name">
+			<div class="message-name">
 				<span class="name"><c:out value="${message.name}" /> </span>
 			</div>
 			<div class="category">カテゴリー：<c:out value="${message.category}" /> </div>
@@ -121,7 +112,7 @@ $(function () {
 				<form method="post"><br />
 					<input name="loginUserId" type="hidden" value="${loginUser.id}" id="loginUserId"/>
 					<input name="messageId" type="hidden" value="${message.id}" id="messageId"/>
-					<input type="submit" value="投稿を削除" /> <br />
+					<p class="home-submit"><input type="submit" value="投稿を削除" /></p>
 				</form>
 			</c:if>
 
@@ -135,7 +126,7 @@ $(function () {
 							<form method="post"><br />
 								<input name="loginUserId" type="hidden" value="${loginUser.id}" id="loginUserId"/>
 								<input name="commentId" type="hidden" value="${comment.id}" id="commentId"/>
-								<input type="submit" value="コメントを削除" /> <br />
+								<p class="home-submit"><input type="submit" value="コメントを削除" /></p>
 							</form>
 						</c:if>
 						<br />
@@ -146,13 +137,13 @@ $(function () {
 			<form action="newComment" method="post"><br />
 				<label for="comment">コメントする</label> <br />
 				<input name="messageId" type="hidden" value="${message.id}" id="messageId"/>
-				<textarea name="text" cols="50" rows="4" class="comment-box" >${comment.text}</textarea> <br />
-				<input type="submit" value="コメントを投稿" /> <br />
+				<textarea name="text" cols="68" rows="5" class="comment-box" >${comment.text}</textarea> <br />
+				<p class="home-submit"><input type="submit" value="コメントを投稿" /></p>
 			</form>
 		</div>
 	</c:forEach>
+	</div>
 </div>
 
-</div>
 </body>
 </html>

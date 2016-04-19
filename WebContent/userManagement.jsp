@@ -6,22 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>ユーザー管理</title>
 
-
-<style>
-body{
-background: #f0e68c;
-font-family: Meiryo;
-}
-
-div {
-background: #ffffff;
-
-
-}
-
-</style>
 
 <script type="text/javascript">
 <!--

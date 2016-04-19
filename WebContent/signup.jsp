@@ -6,60 +6,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>ユーザー新規登録</title>
 
 
-<style>
-body{
-background: #f0e68c;
-font-family: Meiryo;
-}
-
-div {
-background: #ffffff;
-text-align: center;
-
-}
-
-</style>
-
 </head>
 <body>
-
-<%--
- TODO
-・本社総務部のみアクセス可能。権限を持たないユーザーが開いた場合、ホーム画面に遷移し適切なメッセージを表示
-・登録が正常に完了したら、ユーザー管理画面に遷移
-・登録が正常に完了しなければ、適切なバリデーションメッセージを表示
- --%>
 
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="messages">
-				<li><c:out value="${messages}"/>
+				<font size="4" color="#ff0000"><c:out value="${messages}" /><br /></font>
 			</c:forEach>
 		</ul>
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
 
+<div id="signup-field">
 <form action="signup" method="post"><br />
-	<label for="name">名前</label>
-	<input name="name" value="${user.name}" id="name"/><br />
+	<p><label for="name">名前</label></p>
+	<p class="name"><input name="name" value="${user.name}" id="name"/></p>
 
-	<label for="loginId">ログインID</label>
-	<input name="loginId"  value="${user.loginId}" id="loginId"/><br />
+	<p><label for="loginId">ログインID</label></p>
+	<p class="login-id"><input name="loginId"  value="${user.loginId}" id="loginId"/></p>
 
-	<label for="password">パスワード(登録用)</label>
-	<input name="password" type="password" id="password"/> <br />
+	<p><label for="password">パスワード(登録用)</label></p>
+	<p class="pass"><input name="password" type="password" id="password"/></p>
 
-	<label for="confirm">パスワード(確認用)</label>
-	<input name="confirm" type="password" id="confirm"/> <br />
+	<p><label for="confirm">パスワード(確認用)</label></p>
+	<p class="confirm"><input name="confirm" type="password" id="confirm"/></p>
 
-	<label for="branch">所属支店</label>
-	<select name="branch">
+	<p><label for="branch">所属支店</label></p>
+	<p class="branch"><select name="branch">
 		<option value="0">支店選択</option>
 		<c:forEach items="${branch}" var="branch">
 			<c:choose>
@@ -71,10 +52,10 @@ text-align: center;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-	</select>  <br />
+	</select></p><br/>
 
-	<label for="department">所属部署</label>
-	<select name="department">
+	<p><label for="department">所属部署</label></p>
+	<p class="department"><select name="department">
 		<option value="0">部署選択</option>
 		<c:forEach items="${department}" var="department">
 			<c:choose>
@@ -86,10 +67,11 @@ text-align: center;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-	</select>  <br />
-	<input type="submit" value="登録" /> <br />
-<a href="userManagement">戻る</a>
+	</select></p>
+	<p class="submit"><input type="submit" value="登録" /></p>
+<p><a href="userManagement">戻る</a></p>
 </form>
+</div>
 </div>
 </body>
 </html>

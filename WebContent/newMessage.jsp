@@ -6,22 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>新規投稿</title>
 
-
-<style>
-body{
-background: #f0e68c;
-font-family: Meiryo;
-}
-
-div {
-background: #ffffff;
-text-align: center;
-
-}
-
-</style>
 
 </head>
 <body>
@@ -31,26 +18,28 @@ text-align: center;
 	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="messages">
-				<li><c:out value="${messages}"/>
+				<font size="4" color="#ff0000"><c:out value="${messages}" /><br /></font>
 			</c:forEach>
 		</ul>
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
 
+<div id="message-field">
 <form action="newMessage" method="post"><br />
-	<label for="title">件名</label> <br />
-	<input name="title" value="${message.title}"  id="title"/><br />
+	<p><label for="title">件名</label></p>
+	<p class="title"><input name="title" value="${message.title}"  id="title"/></p>
 
-	<label for="category">カテゴリー</label> <br />
-	<input name="category" value="${message.category}"  id="title"/><br />
+	<p><label for="category">カテゴリー</label></p>
+	<p class="category"><input name="category" value="${message.category}"  id="title"/></p>
 
-	<label for="text">本文</label> <br />
-	<textarea name="text" cols="50" rows="20" class="text-box" >${message.text}</textarea> <br />
+	<p><label for="text">本文</label></p>
+	<p class="text-box"><textarea name="text" cols="50" rows="20" class="text-box" >${message.text}</textarea></p>
 
-	<input type="submit" value="投稿" /> <br />
-	<a href="./">戻る</a>
+	<p class="submit"><input type="submit" value="投稿" /></p>
+	<p><a href="./">ホームに戻る</a></p>
 </form>
+</div>
 </div>
 </body>
 </html>

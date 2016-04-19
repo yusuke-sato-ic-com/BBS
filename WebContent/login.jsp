@@ -6,18 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel=“stylesheet” href=“style.css”>
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 
 <title>ログイン</title>
 </head>
 <body>
 
-<div class="header">
+<div id="header">
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul> <%-- <ul>は順序のないリストを表示する歳際に使用する。順序のあるリスト表示は<ol> --%>
 				<c:forEach items="${errorMessages}" var="messages"> <%-- 配列をループ処理 --%>
-					<h3><li><c:out value="${messages}" /></h3>
+					<font size="4" color="#ff0000"><c:out value="${messages}" /><br /></font>
 				</c:forEach>
 			</ul>
 		</div>
@@ -25,16 +25,16 @@
 	</c:if>
 </div>
 
-<h2>掲示板<br /></h2>
-<form action="login" method="post"><br />
-	<label for="loginId">ログインID</label>
-	<input name="loginId" id="loginId"/> <br />
+<div id="login-field">
+<p class="login-field-title">ログイン<br /></p>
+<form action="login" method="post">
+	<p><label for="loginId">ログインID</label></p>
+	<p class="id"><input name="loginId" type="id"  id="loginId"/></p>
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
-
-	<input type="submit" value="ログイン" /> <br />
+	<p><label for="password">パスワード</label></p>
+	<p class="pass"><input name="password" type="password" id="password"/></p>
+	<p class="submit"><input type="submit" value="ログイン" /></p>
 </form>
-
+</div>
 </body>
 </html>

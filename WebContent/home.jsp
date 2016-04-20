@@ -98,16 +98,17 @@ $(function () {
 		<c:remove var="errorMessages" scope="session" />
 	</c:if>
 
-	<div id="message-comment">
+
 	<c:forEach items="${messages}" var="message">
+	<div id="message-comment">
 		<div class="message">
 			<div class="message-name">
 				<span class="name"><c:out value="${message.name}" /> </span>
 			</div>
-			<div class="category">カテゴリー：<c:out value="${message.category}" /> </div>
-			<div class="title">件名：<c:out value="${message.title}" /> </div>
-			<div class="text">本文：<c:out value="${message.text}" /> </div>
-			<div class="date">投稿日時：<fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
+			<div class="message-category">カテゴリー：<c:out value="${message.category}" /> </div>
+			<div class="message-title">件名：<c:out value="${message.title}" /> </div>
+			<div class="message-text">本文：<br /><c:out value="${message.text}" /> </div>
+			<div class="message-date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
 			<c:if test="${message.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == message.branchId}">
 				<form method="post"><br />
 					<input name="loginUserId" type="hidden" value="${loginUser.id}" id="loginUserId"/>
@@ -119,9 +120,9 @@ $(function () {
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${message.id == comment.messageId }">
 					<div class="comment">
-						<div class="name">コメント投稿者：<c:out value="${comment.name}"/></div>
-						<div class="text">コメント：<c:out value="${comment.text}" /> </div>
-						<div class="date">投稿日時：<fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+						<div class="comment-name"><c:out value="${comment.name} さんのコメント"/></div>
+						<div class="comment-text"><c:out value="${comment.text}" /> </div>
+						<div class="comment-date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<c:if test="${comment.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == comment.branchId}">
 							<form method="post"><br />
 								<input name="loginUserId" type="hidden" value="${loginUser.id}" id="loginUserId"/>
@@ -141,8 +142,9 @@ $(function () {
 				<p class="home-submit"><input type="submit" value="コメントを投稿" /></p>
 			</form>
 		</div>
+		</div>
 	</c:forEach>
-	</div>
+
 </div>
 
 </body>

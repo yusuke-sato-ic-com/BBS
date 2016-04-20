@@ -36,19 +36,12 @@ public class HomeServlet extends HttpServlet {
 		String minDate = date.get(0).getMinDate();
 		String maxDate = date.get(0).getMaxDate();
 
-//		System.out.println("DaoMinDate : " + minDate);
-//		System.out.println("DaoMaxDate : " + maxDate);
-
-//		System.out.println(request.getParameter("fromDate"));
-//		System.out.println(request.getParameter("toDate"));
-
 		String fromDate;
 		if(request.getParameter("fromDate") == "") {
 			fromDate = minDate;
 		} else {
 			fromDate = (request.getParameter("fromDate"));
 		}
-//		System.out.println("fromDate : " + fromDate);
 
 		String toDate;
 		if(request.getParameter("toDate") == "") {
@@ -56,7 +49,6 @@ public class HomeServlet extends HttpServlet {
 		} else {
 			toDate = (request.getParameter("toDate"));
 		}
-//		System.out.println("toDate : " + toDate);
 
 		String categoryName;
 		if(request.getParameter("category") != null){

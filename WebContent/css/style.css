@@ -30,9 +30,13 @@ login-field p{
  	text-align: center;
     }
 
+.pass,.id{
+	text-align: left;
+}
+
 input[type="id"],
 input[type="password"] {
-    width: 285px;
+    width: 280px;
     padding: 4px;
     font-size: 14px;
     }
@@ -40,7 +44,8 @@ input[type="password"] {
 .submit{
     text-align: center;
     }
-    .submit input{
+
+.submit input{
   font-family: Arial;
   color: #ffffff;
   font-size: 16px;
@@ -52,19 +57,21 @@ input[type="password"] {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  -webkit-box-shadow: 0px 8px 6px #e3e3e3;
   -moz-box-shadow: 0px 8px 6px #e3e3e3;
-  box-shadow: 0px 8px 6px #e3e3e3;
   border: solid #f5fdff 4px;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#61c7e0), to(#418da8));
   background: -moz-linear-gradient(top, #61c7e0, #418da8);
   }
+
 .submit input:hover{
   background: #37a4bf;
  }
 
 
-
+.home-name{
+ font-family: Arial;
+ font-size: 28px;
+}
 
 
 
@@ -72,16 +79,37 @@ input[type="password"] {
     text-align: center;
     }
 
+.comment-name,.comment-text,.comment-date{
+	margin-top: 6px;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.comment-name{
+	font-weight: 600;
+}
+
+.message-date,.comment-date{
+	font-size: 14px;
+	text-align: right;
+}
+
+
 .home-submit input{
-  font-family: Arial;
+margin-top: 6px;
+ font-family: Arial;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   padding-top: 5px;
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
   text-decoration: none;
-
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0px 8px 6px #e3e3e3;
+  border: solid #f5fdff 4px;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#61c7e0), to(#418da8));
   background: -moz-linear-gradient(top, #61c7e0, #418da8);
 
@@ -122,11 +150,120 @@ input[type="password"] {
 
 
 
+#signup-field .signup-field-title{
+  font-family: Arial;
+  font-size: 24px;
+  color: #4eb4c2;
+  }
+
+#edit-field .edit-field-title{
+  font-family: Arial;
+  font-size: 24px;
+  color: #4eb4c2;
+  }
+
+#message-field .message-field-title{
+  font-family: Arial;
+  font-size: 24px;
+  color: #4eb4c2;
+  text-align: center;
+  }
+
+
+#management-field .management-field-title{
+  font-family: Arial;
+  font-size: 24px;
+  color: #4eb4c2;
+  text-align: center;
+   margin-bottom: 20px;
+  }
+
+/* 区切り用の線
+  #management-field .management-field-title{
+  padding-bottom: 6px;
+  border-bottom: 2px solid #4eb4c2;
+  margin-bottom: 20px;
+  }
+ */
+
+#management-field{
+    width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #555;
+    }
+
+#management-field{
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 10px #488a9e;
+  -moz-box-shadow: 0px 1px 10px #488a9e;
+  box-shadow: 0px 1px 10px #488a9e;
+  border: solid #4eb4c2 1px;
+  background: #fafafa;
+  }
+
+#management-field{
+  padding-bottom: 6px;
+  border-bottom: 2px solid #4eb4c2;
+  margin-bottom: 20px;
+  }
+
+  #management-field p{
+  color: #077685;
+  font-weight: bold;
+  }
+
+#management-field{
+  font-family: Arial;
+  font-size: 16px;
+  color: #4eb4c2;
+  }
+
+.management-submit input{
+margin-top: 6px;
+ font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  text-decoration: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0px 8px 6px #e3e3e3;
+  border: solid #f5fdff 4px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#61c7e0), to(#418da8));
+  background: -moz-linear-gradient(top, #61c7e0, #418da8);
+ }
+
+.management-submit{
+    text-align: right;
+    }
+
+ #management-field .management-submit{
+  padding-bottom: 6px;
+  border-bottom: 2px solid #4eb4c2;
+  margin-bottom: 20px;
+  }
+
+
+
+.message-title,.message-text{
+  padding-bottom: 6px;
+  border-bottom: 2px solid #4eb4c2;
+  margin-bottom: 20px;
+  }
+
 
 
 
 #signup-field{
     width: 400px;
+    word-break:break-all;
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;
@@ -140,7 +277,21 @@ signup-field p{
     margin-bottom: 14px;
     }
 
-    #signup-field p{
+.message-name,.message-title,.message-text,.message-date{
+    margin-bottom: 6px;
+    margin-left: 6px;
+    margin-right: 6px;
+    }
+.message-category{
+	margin-bottom: 6px;
+    margin-left: 6px;
+    margin-right: 6px;
+    float: right;
+}
+
+
+
+#signup-field p{
   color: #077685;
   font-weight: bold;
   }
@@ -150,6 +301,10 @@ signup-field p{
   font-size: 16px;
   color: #4eb4c2;
   }
+
+.signup-field-title{
+    text-align: center;
+    }
 
 /* skin */
 #signup-field{
@@ -175,6 +330,10 @@ signup-field p{
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;
+    }
+
+.edit-field-title{
+    text-align: center;
     }
 
 edit-field p{
@@ -217,6 +376,7 @@ edit-field p{
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;
+    word-break:break-all;
     }
 
 message-field p{
@@ -227,7 +387,7 @@ message-field p{
     margin-bottom: 14px;
     }
 
-    #message-field p{
+#message-field p{
   color: #077685;
   font-weight: bold;
   }
@@ -259,8 +419,9 @@ message-field p{
 
 
 
+
 menu p{
-    font-size: 16px;
+    font-size: 20px;
     text-align: right;
     }
 
@@ -273,7 +434,7 @@ menu p{
 
 #menu{
   font-family: Arial;
-  font-size: 16px;
+  font-size: 18px;
   color: #077685;
   text-align: right;
   }
@@ -312,6 +473,7 @@ refine-search p{
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;
+    word-break:break-all;
     }
 
 .message-name{
@@ -359,14 +521,8 @@ message-comment p{
   }
 
 .comment{
-
+	margin-top: 6px;
   border: solid #4eb4c2 1px;
   background: #fafafa;
-  }
-
-.comment{
-  padding-bottom: 1px;
-  border-bottom: 1px solid #4eb4c2;
-  margin-bottom: 10px;
   }
 

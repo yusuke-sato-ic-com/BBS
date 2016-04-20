@@ -34,33 +34,36 @@ function onDisp(){
 </head>
 <body>
 
-<div class="header">
-<a href="signup">ユーザー新規登録</a>
-<a href="./">ホームへ戻る</a> <br />
+<div id="menu">
+<p><a href="signup">ユーザー新規登録</a>
+<a href="./">ホームへ戻る</a></p> <br />
+<div class="home-name"><c:out value="${loginUser.name}"/>&nbsp;</div>
 </div>
 
+<div id="management-field">
+<p class="management-field-title">ユーザー管理画面<br /></p>
 <c:forEach items="${user}" var="user">
 	<div class="user">
 		<div class="user">
-			<span class="user"><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a></span>
+			<p><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a>
+			<c:out value="${user.loginId}" /></p>
 		</div>
-		<div class="user"><c:out value="${user.loginId}" /></div>
-
 		<c:choose>
 			<c:when test="${user.using == 1 }">
 				<form action="userManagement" onSubmit="return offDisp()" method="post">
-					<input name="user_id" type="hidden" value="${user.id}"/>
-					<input name="using" type="submit" value="ON" /><br />
+					<p><input name="user_id" type="hidden" value="${user.id}"/></p>
+					<p class="management-submit"><input name="using" type="submit" value="ON" /></p>
 				</form>
 			</c:when>
 			<c:otherwise>
 				<form action="userManagement" onSubmit="return onDisp()" method="post">
-					<input name="user_id" type="hidden" value="${user.id}"/>
-					<input name="using" type="submit" value="OFF" /><br />
+					<p><input name="user_id" type="hidden" value="${user.id}"/></p>
+					<p class="management-submit"><input name="using" type="submit" value="OFF" /></p>
 				</form>
 			</c:otherwise>
 		</c:choose>
 	</div>
 </c:forEach>
+</div>
 </body>
 </html>

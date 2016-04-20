@@ -14,6 +14,13 @@
 <body>
 
 <div class="main-contents">
+
+
+<div id="menu">
+		<p><a href="./">ホームへ戻る</a></p><br />
+		<div class="home-name"><c:out value="${loginUser.name}"/>&nbsp;</div>
+</div>
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -26,6 +33,7 @@
 </c:if>
 
 <div id="message-field">
+<p class="message-field-title">新規投稿画面<br /></p>
 <form action="newMessage" method="post"><br />
 	<p><label for="title">件名</label></p>
 	<p class="title"><input name="title" value="${message.title}"  id="title"/></p>
@@ -37,7 +45,7 @@
 	<p class="text-box"><textarea name="text" cols="50" rows="20" class="text-box" >${message.text}</textarea></p>
 
 	<p class="submit"><input type="submit" value="投稿" /></p>
-	<p><a href="./">ホームに戻る</a></p>
+
 </form>
 </div>
 </div>

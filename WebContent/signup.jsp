@@ -14,6 +14,13 @@
 <body>
 
 <div class="main-contents">
+
+
+<div id="menu">
+	<p><a href="userManagement">管理画面へ戻る</a></p><br />
+	<div class="home-name"><c:out value="${loginUser.name}"/>&nbsp;</div>
+</div>
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -26,6 +33,7 @@
 </c:if>
 
 <div id="signup-field">
+<p class="signup-field-title">ユーザー新規登録画面<br /></p>
 <form action="signup" method="post"><br />
 	<p><label for="name">名前</label></p>
 	<p class="name"><input name="name" value="${user.name}" id="name"/></p>
@@ -69,7 +77,7 @@
 		</c:forEach>
 	</select></p>
 	<p class="submit"><input type="submit" value="登録" /></p>
-<p><a href="userManagement">戻る</a></p>
+
 </form>
 </div>
 </div>

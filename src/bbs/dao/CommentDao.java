@@ -81,7 +81,8 @@ public class CommentDao {
 				int id = rs.getInt("id");
 				int userId = rs.getInt("user_id");
 				int messageId = rs.getInt("message_id");
-				String text = rs.getString("text");
+
+				String text = rs.getString("text").replaceAll("\\r\\n", "<br />");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 				String name = rs.getString("name");
 

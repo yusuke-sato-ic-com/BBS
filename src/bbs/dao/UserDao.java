@@ -101,7 +101,9 @@ public class UserDao {
 		// プリコンパイルされたSQL文を表す
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM bbs.user";
+			String sql = "SELECT user.*, branch.name AS branch_name, department.name AS department_name "
+					+ "FROM bbs.user, bbs.branch, bbs.department "
+					+ "WHERE user.branch = branch.id AND user.department = department.id";
 			// DBからデータを取得
 			ps = connection.prepareStatement(sql);
 
@@ -128,6 +130,9 @@ public class UserDao {
 				String branchId = rs.getString("branch");
 				String departmentId = rs.getString("department");
 				int using = rs.getInt("using");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
+
 
 				User user = new User();
 				user.setId(id);
@@ -137,6 +142,8 @@ public class UserDao {
 				user.setBranchId(branchId);
 				user.setDepartmentId(departmentId);
 				user.setUsing(using);
+				user.setBranchName(branchName);
+				user.setDepartmentName(departmentName);
 
 				ret.add(user);
 			}

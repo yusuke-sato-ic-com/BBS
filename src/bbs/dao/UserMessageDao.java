@@ -87,7 +87,11 @@ public class UserMessageDao {
 
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				String text = rs.getString("text");
+
+				String text = rs.getString("text").replaceAll("\\r\\n", "<br />");
+				System.out.println(text);
+
+			//	String text = rs.getString("text");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 				String name = rs.getString("name");
 				String category = rs.getString("category");

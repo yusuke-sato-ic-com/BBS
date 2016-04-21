@@ -207,7 +207,7 @@ margin-top: 6px;
 #management-field{
   padding-bottom: 6px;
   border-bottom: 2px solid #4eb4c2;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   }
 
   #management-field p{
@@ -245,9 +245,9 @@ margin-top: 6px;
     }
 
  #management-field .management-submit{
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   border-bottom: 2px solid #4eb4c2;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   }
 
 

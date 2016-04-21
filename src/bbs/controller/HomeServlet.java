@@ -30,6 +30,8 @@ public class HomeServlet extends HttpServlet {
 		List<UserMessage> messages = new MessageService().getMessage();
 		List<Comment> comments = new CommentService().getComment();
 
+
+
 		// DBのminDate,maxDateを取得
 		List<Message> date = new MessageService().getDate();
 

@@ -47,7 +47,7 @@ function onDisp(){
 		<div class="user">
 			<p><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a>
 			<c:out value="${user.loginId}" /></p>
-		</div>
+			<p><c:out value="${user.branchName}" />	<c:out value="${user.departmentName}" /></p>
 		<c:choose>
 			<c:when test="${user.using == 1 }">
 				<form action="userManagement" onSubmit="return offDisp()" method="post">
@@ -62,6 +62,8 @@ function onDisp(){
 				</form>
 			</c:otherwise>
 		</c:choose>
+		</div>
+
 	</div>
 </c:forEach>
 </div>

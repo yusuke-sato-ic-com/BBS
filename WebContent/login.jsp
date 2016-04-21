@@ -26,7 +26,7 @@
 </div>
 
 <div id="login-field">
-<p class="login-field-title">ログイン<br /></p>
+<p class="login-field-title">掲示板ログイン<br /></p>
 <form action="login" method="post">
 	<p><label for="loginId">ログインID</label></p>
 	<p class="id"><input name="loginId" type="id"  id="loginId"/></p>

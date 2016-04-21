@@ -3,6 +3,7 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,7 +69,11 @@ $(function () {
 	</div>
 </div>
 
+
+
+
 <div class="messages">
+
 
 	<div id="refine-search">
 		<form>
@@ -107,7 +112,7 @@ $(function () {
 			</div>
 			<div class="message-category">カテゴリー：<c:out value="${message.category}" /> </div>
 			<div class="message-title">件名：<c:out value="${message.title}" /> </div>
-			<div class="message-text">本文：<br /><c:out value="${message.text}" /> </div>
+			<div class="message-text">本文：<br />${message.text}</div>
 			<div class="message-date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
 			<c:if test="${message.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == message.branchId}">
 				<form method="post"><br />
@@ -121,7 +126,7 @@ $(function () {
 				<c:if test="${message.id == comment.messageId }">
 					<div class="comment">
 						<div class="comment-name"><c:out value="${comment.name} さんのコメント"/></div>
-						<div class="comment-text"><c:out value="${comment.text}" /> </div>
+						<div class="comment-text">${comment.text}</div>
 						<div class="comment-date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<c:if test="${comment.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == comment.branchId}">
 							<form method="post"><br />

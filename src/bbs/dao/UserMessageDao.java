@@ -43,11 +43,6 @@ public class UserMessageDao {
 				ps.setString(3, toDate);
 			}
 
-			System.out.println(ps.toString());
-//			System.out.println(categoryName);
-//			System.out.println(fromDate);
-//			System.out.println(toDate);
-
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);
 			return ret;
@@ -89,9 +84,7 @@ public class UserMessageDao {
 				String title = rs.getString("title");
 
 				String text = rs.getString("text").replaceAll("\\r\\n", "<br />");
-				System.out.println(text);
 
-			//	String text = rs.getString("text");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 				String name = rs.getString("name");
 				String category = rs.getString("category");

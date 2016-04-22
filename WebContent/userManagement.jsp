@@ -30,6 +30,16 @@ function onDisp(){
 	}
 }
 // -->
+
+<!--
+function deleteDisp(){
+	if(window.confirm('本当に削除してよろしいですか？')){
+		return true;
+	} else {
+		return false;
+	}
+}
+// -->
 </script>
 </head>
 <body>
@@ -48,20 +58,25 @@ function onDisp(){
 			<p><a href="userEdit?user_id=${user.id}"><c:out value="${user.name}" /></a>
 			<c:out value="${user.loginId}" /></p>
 			<p><c:out value="${user.branchName}" />	<c:out value="${user.departmentName}" /></p>
-		<c:choose>
-			<c:when test="${user.using == 1 }">
-				<form action="userManagement" onSubmit="return offDisp()" method="post">
-					<p><input name="user_id" type="hidden" value="${user.id}"/></p>
-					<p class="management-submit"><input name="using" type="submit" value="ON" /></p>
-				</form>
-			</c:when>
-			<c:otherwise>
-				<form action="userManagement" onSubmit="return onDisp()" method="post">
-					<p><input name="user_id" type="hidden" value="${user.id}"/></p>
-					<p class="management-submit"><input name="using" type="submit" value="OFF" /></p>
-				</form>
-			</c:otherwise>
-		</c:choose>
+			<form action="userManagement" onSubmit="return deleteDisp()" method="post">
+				<p><input name="user_id" type="hidden" value="${user.id}"/>
+				<p class="management-delete-submit"><input name="delete-user" type="submit" value="削除" /></p>
+			</form>
+			<c:choose>
+				<c:when test="${user.using == 1 }">
+					<form action="userManagement" onSubmit="return offDisp()" method="post">
+						<p><input name="user_id" type="hidden" value="${user.id}"/></p>
+						<p class="management-submit"><input name="using" type="submit" value="ON" /></p>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form action="userManagement" onSubmit="return onDisp()" method="post">
+						<p><input name="user_id" type="hidden" value="${user.id}"/></p>
+						<p class="management-submit"><input name="using" type="submit" value="OFF" /></p>
+					</form>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 
 	</div>

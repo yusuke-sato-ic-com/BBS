@@ -25,8 +25,6 @@ $(function () {
     	maxDate: new Date(),
         onSelect: function (selectedDate) {
             $("#fromDate").datepicker("option", "showOn", 'button');
-            $("#fromDate").datepicker("option", option, selectedDate);
-
         }
     });
     $("#toDate").datepicker({
@@ -34,7 +32,6 @@ $(function () {
     	maxDate: new Date(),
         onSelect: function (selectedDate) {
             $("#toDate").datepicker("option", "showOn", 'button');
-            $("#toDate").datepicker("option", option, selectedDate);
         }
     });
 });
@@ -112,7 +109,7 @@ $(function () {
 			</div>
 			<div class="message-category">カテゴリー：<c:out value="${message.category}" /> </div>
 			<div class="message-title">件名：<c:out value="${message.title}" /> </div>
-			<div class="message-text">本文：<br />${message.text}</div>
+			<div class="message-text">本文：<br /><br /><c:out value="${message.text}" escapeXml="{true}"/></div>
 			<div class="message-date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /> </div>
 			<c:if test="${message.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == message.branchId}">
 				<form method="post"><br />
@@ -126,7 +123,7 @@ $(function () {
 				<c:if test="${message.id == comment.messageId }">
 					<div class="comment">
 						<div class="comment-name"><c:out value="${comment.name} さんのコメント"/></div>
-						<div class="comment-text">${comment.text}</div>
+						<div class="comment-text"><c:out value="${comment.text}" escapeXml="{true}"/></div>
 						<div class="comment-date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<c:if test="${comment.userId == loginUser.id || loginUser.departmentId == 2 || loginUser.departmentId == 3 && loginUser.branchId == comment.branchId}">
 							<form method="post"><br />

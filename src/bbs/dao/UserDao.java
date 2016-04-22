@@ -14,28 +14,48 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserDao {
 
-	// ユーザー編集で入力されたデータでDB更新
-		public void updateUsing(Connection connection, Integer userId, Integer using) {
 
-			PreparedStatement ps = null;
-			try {
-				StringBuilder sql = new StringBuilder();
-				sql.append("UPDATE user SET ");
-				sql.append("`using` = ? ");
-				sql.append("WHERE id = ?");
+	// 編集対象のユーザー情報を取得
+	public void deleteUser(Connection connection, Integer userId) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM user WHERE id = ?");
 
-				ps = connection.prepareStatement(sql.toString());
+			ps = connection.prepareStatement(sql.toString());
 
-				ps.setInt(1, using);
-				ps.setInt(2, userId);
+			ps.setInt(1, userId);
 
-				ps.executeUpdate();
-			} catch (SQLException e) {
-				throw new SQLRuntimeException(e);
-			} finally {
-				close(ps);
-			}
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
 		}
+	}
+
+	// ユーザー編集で入力されたデータでDB更新
+	public void updateUsing(Connection connection, Integer userId, Integer using) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE user SET ");
+			sql.append("`using` = ? ");
+			sql.append("WHERE id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, using);
+			ps.setInt(2, userId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 	// ユーザー編集で入力されたデータでDB更新
 	public void update(Connection connection, User user, Integer userId) {

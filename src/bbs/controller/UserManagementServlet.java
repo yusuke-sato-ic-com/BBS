@@ -34,14 +34,22 @@ public class UserManagementServlet extends HttpServlet {
 		Integer userId = Integer.parseInt(request.getParameter("user_id"));
 		Integer using;
 
-		if(request.getParameter("using").equals("ON")) {
-			using = 0;
-		} else {
-			using = 1;
+		if(request.getParameter("delete-user") != null){
+			new UserService().editor(userId);
+			response.sendRedirect("userManagement");
 		}
 
-		new UserService().editor(userId, using);
-		response.sendRedirect("userManagement");
+		if(request.getParameter("using") != null){
+			if(request.getParameter("using").equals("ON")) {
+				using = 0;
+				new UserService().editor(userId, using);
+				response.sendRedirect("userManagement");
+			} else {
+				using = 1;
+				new UserService().editor(userId, using);
+				response.sendRedirect("userManagement");
+			}
+		}
 
 	}
 

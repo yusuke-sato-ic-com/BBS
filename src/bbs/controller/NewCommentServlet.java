@@ -55,6 +55,9 @@ public class NewCommentServlet extends HttpServlet {
 
 		if(StringUtils.isEmpty(commentText) == true) {
 			messages.add("コメントを入力してください。");
+		}else if(commentText.contains("無理") == true){
+			messages.add("修造「諦めんなよ！キミならできる！」");
+
 		} else {
 			int digit = commentText.length();
 			if(digit > 500) {

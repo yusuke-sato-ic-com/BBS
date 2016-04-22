@@ -61,9 +61,6 @@ public class MessageDao {
 			String minDate = df.format(rs.getDate("min"));
 			String maxDate = df.format(rs.getDate("max"));
 
-//			System.out.println("minDate : " + minDate);
-//			System.out.println("maxDate : " + maxDate);
-
 			Message Date = new Message();
 			Date.setMinDate(minDate);
 			Date.setMaxDate(maxDate);

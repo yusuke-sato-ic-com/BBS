@@ -13,26 +13,48 @@ import bbs.utils.CipherUtil;
 public class UserService {
 
 	// ユーザー編集用（利用停止、復活）
-		public void editor(Integer userId, Integer using) {
+	public void editor(Integer userId) {
 
-			Connection connection = null;
-			try {
-				connection = getConnection();
+		Connection connection = null;
+		try {
+			connection = getConnection();
 
-				UserDao userDao = new UserDao();
-				userDao.updateUsing(connection,userId, using);
+			UserDao userDao = new UserDao();
+			userDao.deleteUser(connection,userId);
 
-				commit(connection);
-			} catch (RuntimeException e) {
-				rollback(connection);
-				throw e;
-			} catch (Error e) {
-				rollback(connection);
-				throw e;
-			} finally {
-				close(connection);
-			}
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
 		}
+	}
+
+	// ユーザー編集用（利用停止、復活）
+	public void editor(Integer userId, Integer using) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			userDao.updateUsing(connection,userId, using);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	// ユーザー編集用
 	public void editor(User user, Integer userId) {

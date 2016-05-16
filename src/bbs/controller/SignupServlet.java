@@ -87,9 +87,9 @@ public class SignupServlet extends HttpServlet {
 			messages.add("ログインIDは半角英数字6～20文字で入力してください。");
 		}
 
+		// ログインIDの重複チェック
 		LoginService loginService = new LoginService();
 		User user = loginService.login(loginId);
-
 		if(user != null) {
 			messages.add("ログインIDがすでに使用されています。");
 		}

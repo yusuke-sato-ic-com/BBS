@@ -34,7 +34,7 @@ public class UserDao {
 		}
 	}
 
-	// ユーザー編集で入力されたデータでDB更新
+	// ユーザーの利用状況を編集
 	public void updateUsing(Connection connection, Integer userId, Integer using) {
 
 		PreparedStatement ps = null;

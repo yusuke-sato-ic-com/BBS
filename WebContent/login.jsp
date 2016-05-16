@@ -29,7 +29,7 @@
 <p class="login-field-title">掲示板ログイン<br /></p>
 <form action="login" method="post">
 	<p><label for="loginId">ログインID</label></p>
-	<p class="id"><input name="loginId" type="id"  id="loginId"/></p>
+	<p class="id"><input name="loginId" id="loginId"/></p>
 
 	<p><label for="password">パスワード</label></p>
 	<p class="pass"><input name="password" type="password" id="password"/></p>

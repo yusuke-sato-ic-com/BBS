@@ -50,7 +50,6 @@ public class LoginService {
 		try {
 			connection = getConnection();
 
-			// passwordを暗号化
 			UserDao userDao = new UserDao();
 			User user = userDao.getUser(connection, loginId);
 
